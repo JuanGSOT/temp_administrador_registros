@@ -1,0 +1,56 @@
+<div class="barra-lateral">
+        <a href=""><i class="mi">person_pin</i></a>
+        <a href=""><i class="mi">domain</i></a>
+        <a href=""><i class="mi">description</i></a>
+        <a href=""><i class="mi">build</i></a>
+</div>
+
+<div class="container">
+<p class="h2">Sistema de prestamos del material escolar</p>
+    <p class="h2 ml-5">Departamento de Desarrollo Academico</p>
+</div>
+
+<br>
+    <div class="container">
+        <strong class="h2">Bienvenid@ <%= current_user.email %></strong>
+    </div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="container text-center">                    
+                <p class="h1">Fecha</p>
+                <p class="h1"><%= Time.now.strftime('%d/%m/%Y') %></p>
+
+                <br>
+
+                <p class="h1">Hora</p>
+                <p id="date_time" class="h1"><%#= Time.now.strftime('%I:%M:%S %P') %></p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 row">
+
+            <div class="col-md-6 botonera">
+                
+                <%= link_to raw("<i class='mi md-28'>keyboard_arrow_right</i>Prestamo"),
+                    root_path, class: 'btn btn-success flex-center' %>
+
+                    <%= link_to raw("<i class='mi md-28'>keyboard_arrow_left</i>Devolucion"),
+                    root_path, class: "btn btn-danger flex-center" %>
+
+                    <%= link_to raw("<i class='mi md-28'>access_alarm</i>Prestamos en curso"),
+                    root_path, class: "btn btn-warning flex-center" %>
+
+                    <%= link_to raw("<i class='mi md-28'>equalizer</i>Registros"),
+                    root_path, class: "btn btn-info flex-center" %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="container">
+        <small><%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "link" %></small>
+    </div>
+</footer>

@@ -13,3 +13,11 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+setInterval(function() { 
+  var d = new Date();
+  var h = d.getHours();
+  var time = (h > 12 ? h - 12 : h) + ":" + d.getMinutes() + ":" + d.getSeconds() + " " + (h > 11 ? "pm" : "am");
+  var selector = document.getElementById("date_time");
+  selector.innerHTML = time;
+}, 1000);

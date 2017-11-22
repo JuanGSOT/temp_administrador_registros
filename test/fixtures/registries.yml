@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  loan: 2017-11-21 21:11:00
+  return: 2017-11-21 21:11:00
+
+two:
+  loan: 2017-11-21 21:11:00
+  return: 2017-11-21 21:11:00

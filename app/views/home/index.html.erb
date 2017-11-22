@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Esta es mi primera pagina</h1>
+    <div class="row">
+        <div class="col-5 m-4 p-5"><%= link_to "Administración de proyectores", new_user_session_path %></div>
+        <div class="col-5 m-4 p-5"><%= link_to "Gestion de Cursos", root_path %></div>
+    </div>
+     <% if user_signed_in? %>
+    <div class="jumbotron">
+    <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
+    </div>
+    <% end %>
+</div>
+<footer class="footer row">
+    <div class="col-6 text-center">
+    <%= link_to 'Registrarse', new_user_registration_path %>
+    </div>
+    <div class="col-6 text-center">
+    Sitio creado por amor al código
+    </div>
+</footer>
