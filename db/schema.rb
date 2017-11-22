@@ -10,7 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122010902) do
+ActiveRecord::Schema.define(version: 20171122031203) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string "name"
+    t.string "details"
+    t.text "description"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registries", force: :cascade do |t|
+    t.integer "article_id"
+    t.datetime "loan"
+    t.datetime "return"
+    t.integer "user_id"
+    t.integer "teacher_id"
+    t.integer "classroom_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_registries_on_article_id"
+    t.index ["classroom_id"], name: "index_registries_on_classroom_id"
+    t.index ["teacher_id"], name: "index_registries_on_teacher_id"
+    t.index ["user_id"], name: "index_registries_on_user_id"
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.integer "code"
+    t.string "name"
+    t.string "surnames"
+    t.boolean "contract"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
