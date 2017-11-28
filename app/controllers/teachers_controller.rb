@@ -20,9 +20,9 @@ class TeachersController < ApplicationController
     @teacher = Teacher.create(teacher_params)
     if @teacher.save
       flash[:notice] = "registro de profesor agregado."
-      redirect_to root_path
+      redirect_to teachers_path
     else
-      flash[:notice] = "algo salio mal al guardar"
+      flash[:alert] = "algo salio mal al guardar"
       redirect_to root_path
     end
   end

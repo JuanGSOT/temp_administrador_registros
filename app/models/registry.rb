@@ -14,8 +14,8 @@
 #
 
 class Registry < ApplicationRecord
-    belongs_to :article
-    belongs_to :teacher
-    belongs_to :classroom
+    belongs_to :article, required: true
+    belongs_to :teacher, required: true
+    belongs_to :classroom, required: true
     
 end

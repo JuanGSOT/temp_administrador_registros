@@ -1,7 +1,7 @@
 class RegistriesController < ApplicationController
   def index
     @registry = Registry.all.where(:return => nil)
-  end
+  end 
 
   def show
   end

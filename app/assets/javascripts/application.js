@@ -49,7 +49,7 @@ setInterval(function() {
 function thisHour(){
   var t = new Date();
   var date_now = t.getDate() + "-" + (t.getMonth() + 1) + "-" + t.getFullYear()
-  var time_now = t.getDay() + " " +t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+  var time_now = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
   var now = date_now + " " + time_now;
   console.log(now);
   $("#registry_loan").val(now);
