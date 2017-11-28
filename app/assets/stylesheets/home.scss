@@ -1,3 +1,35 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.header-hom {
+    background-color: #1cd045;
+    color: white;
+    height: 30vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer{
+    background-color: #5f7c8a;
+    font-weight: bold;
+    color: #fff;
+    padding: 15px 0;
+    
+    position: relative;
+    clear: both;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.c-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.c-link:hover {
+    color: #000;
+    text-decoration: none;
+}

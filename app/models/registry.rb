@@ -17,4 +17,5 @@ class Registry < ApplicationRecord
     belongs_to :article
     belongs_to :teacher
     belongs_to :classroom
+    
 end

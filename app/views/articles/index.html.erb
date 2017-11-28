@@ -1,2 +1,71 @@
-<h1>Articles#index</h1>
-<p>Find me in app/views/articles/index.html.erb</p>
+<div class="grid-comp">
+<%= render 'layouts/headerDate' %>
+<%= render 'layouts/lateral' %>
+    <div class="container main">
+        <br>
+        <h1>Materiales</h1>
+        <p class="text-center">
+        <label for="mat">Eliga una opción:</label>
+        <select id="mat" class="custom-select">
+            <option value="0">Todos</option>
+            <option value="1">Proyectores</option>
+            <option value="2">Cables</option>
+            <option value="3">Cafetera</option>
+        </select>
+        </p>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-10">
+                <div class="container row">
+                    <% @article.each do |art| %>
+                        <div class="
+                        col-xs-12 
+                        col-sm-12 
+                        col-md-12
+                        col-lg-6 my-2">
+                        <div class="card">
+                            <h4 class="card-header" style="background: #FF9800; color: white; font-weight:bold;">
+                                <%= (art.name).capitalize %>
+                            </h4>
+                            <div class="card-block p-3" style="background: #FFE0B2">
+                                <h4 class="card-title">
+                                    Marca/Modelo: <br><%= art.details %>
+                                </h4>
+                                <div class="card-text">
+                                    Ultimo mantenimiento: DD/MM/YYYY  <br>  Tiempo en servicio: HH:MM <br>
+                                    <hr>
+                                    Descripcion: <br>
+                                    <%= art.description %>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-around" style="background:#FFC107">
+                                <button class="btn btn-info"><i class="mi md-light" style="line-height:">&#xE150;</i>Editar</button>
+                                <button class="btn btn-danger"><i class="mi">&#xE92B;</i>Eliminar</button>
+                            </div>
+                        </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-2">
+                <form action="">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="name">Marca y modelo</label>
+                    <input type="text" id="name" class="form-control">
+                    <small class="text-muted">Separe con una coma cada uno</small>
+                </div>
+                <div class="form-group">
+                    <label for="name">Descripcion</label>
+                    <textarea name="" id="name" class="form-control" rows="2"></textarea>
+                </div>
+                <input type="submit" value="Guardar" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+    <%= render 'layouts/footer' %>
+</div>

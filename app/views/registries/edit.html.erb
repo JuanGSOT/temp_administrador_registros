@@ -1,2 +1,17 @@
-<h1>Registries#edit</h1>
-<p>Find me in app/views/registries/edit.html.erb</p>
+<div class="jumbotron">
+    <div class="row text-center">
+        <div class="col-sm-6">
+                    <%= @registry.article.name %> <br>
+                    <%= @registry.article.details %> <br>
+                    <%= @registry.article.description %> <br>
+                    <%= @registry.teacher.name + " " + @registry.teacher.surnames %> <br>
+                    <%= @registry.teacher.department.name %> <br>
+                    <%= @registry.classroom.name %>
+        </div>
+        <div class="col-sm-6">
+            <div style="width:240px; height:240px; background-color:dodgerblue"></div>
+            <br>
+            <input type="submit" value="terminar" class="btn btn-success">
+        </div>
+    </div>
+</div>

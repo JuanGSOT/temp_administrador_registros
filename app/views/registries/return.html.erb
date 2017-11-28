@@ -1,0 +1,23 @@
+<div class="grid-comp">
+<%= render "layouts/headerDate" %>
+<%= render "layouts/lateral" %>
+    <div class="container main my-3">
+        <h1>Registrar entrega</h1>
+        <br>
+        <div class="form-inline">
+            <div class="form-group fg-return">
+            <label for="code" class="mr-sm-2">Clave del profesor:</label>
+             <%= form_for :registry, url: registry_path(@registry.id), method: :patch ,remote:true do |f| %>
+                <input type="text" name="code" id="code" placeholder="Ingrese código del profesor" autocomplete="off", class="form-control mx-sm-2 lg">
+                <a href="#" class="btn btn-info">Buscar</a>
+            <% end %>
+              
+            </div>
+        </div>
+
+        <br>
+
+        
+    </div>
+    <%= render "layouts/footer" %>
+</div>

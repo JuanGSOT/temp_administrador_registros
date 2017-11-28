@@ -1,0 +1,27 @@
+<nav class="barra-lateral">
+    <%= link_to teachers_path do %>
+        <i class="mi">person_pin</i>
+        <small>Profesores</small>
+    <% end %>
+    <%= link_to departments_path do %>
+        <i class="mi">domain</i>
+        <small>Departamentos</small>
+    <% end %>
+    <%= link_to articles_path do %>
+        <i class="mi">description</i>
+        <small>Material</small>
+    <% end %>
+    <%= link_to edit_user_registration_path do %>
+        <i class="mi">build</i>
+        <small>Opciones</small>
+    <% end %>
+</nav>
+<script>
+$(document).ready(function(){
+if ($(".container").height() > $(window).height()) {
+    $(".barra-lateral").removeClass("vh-auto").addClass("vh-100");
+}else{
+    $(".barra-lateral").removeClass("vh-100").addClass("vh-auto");
+}
+});
+</script>

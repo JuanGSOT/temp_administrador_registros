@@ -1,0 +1,9 @@
+<% @teachers.each do |x| %>
+    <tr>
+        <td scope="row"><%= x.code %></td>
+        <td><%= x.name %></td>
+        <td><%= x.surnames %></td>
+        <td><%= Department.find(1).name %></td>
+        <td><%= x.contract == true ? "Honorario" : "Plaza" %></td>
+    </tr>
+<% end %>

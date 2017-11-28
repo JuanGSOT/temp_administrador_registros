@@ -13,11 +13,44 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery3
+//= require jquery_ujs
+//= require highcharts/highcharts
+//= require highcharts/highcharts-more
+//= require highcharts/highstock
+
+/* fechas - history*/
+function another(val) {
+  if (val === '0') {
+    var menu = document.getElementsByClassName("menu");
+    menu[1].style.display = "block";
+    menu[0].style.display = "none";
+  }
+}
+
+
+$(document).ready(function () {
+  setTimeout(function () {
+    $(".notice, .alert").slideUp(3000).hide(4000);
+  }, 3000);
+});
 
 setInterval(function() { 
   var d = new Date();
   var h = d.getHours();
-  var time = (h > 12 ? h - 12 : h) + ":" + d.getMinutes() + ":" + d.getSeconds() + " " + (h > 11 ? "pm" : "am");
+  var hr = (h > 12 ? h - 12 : h);
+  var mi = d.getMinutes();
+  var s = d.getSeconds();
+  var time =  (hr<10?" 0":" ") + hr + ":" + (mi<10?"0":"") + mi + ":" + (s<10?"0":"") + s + " " + (h > 11 ? "pm" : "am");
   var selector = document.getElementById("date_time");
   selector.innerHTML = time;
 }, 1000);
+
+function thisHour(){
+  var t = new Date();
+  var date_now = t.getDate() + "-" + (t.getMonth() + 1) + "-" + t.getFullYear()
+  var time_now = t.getDay() + " " +t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+  var now = date_now + " " + time_now;
+  console.log(now);
+  $("#registry_loan").val(now);
+}

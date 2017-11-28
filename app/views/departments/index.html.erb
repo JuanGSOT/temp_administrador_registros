@@ -1,0 +1,57 @@
+<div class="grid-comp">
+<%= render 'layouts/headerDate' %>
+<%= render 'layouts/lateral' %>
+    <div class="container main">
+    <br>
+    <h1>Departamentos</h1>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td scope="col">Eliminar</td>
+                            <td scope="col">Editar</td>
+                            <td scope="col">Nombre</td>
+                        </tr>
+                    </thead>
+                    <tbody class="btn-i">
+                        <tr>
+                        <% @departments.each do |t| %>
+                            <td><%= link_to raw("<i class='btn btn-danger mi md-36'>&#xE92B;</i>"), t, method: :delete, data: { confirm: 'Estas seguro de eliminarlo?' } %></td>
+                            
+                            <td><%= link_to root_path do %><i class="btn btn-warning mi md-36 md-light">&#xE150;</i><% end %></td>
+                            <td><h4><%= t.name %></h4></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <%= high_chart("my_id3", @chart3) do |c| %>
+                    <%= raw "options.tooltip.formatter = function() {return '<b> Se registraron del material: '+ this.point.name +'</b>: '+ this.y +' prestamo(s)';}"  %>
+                    <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
+                <% end %>
+            </div>
+        </div>
+    
+        <div class="jumbotron">
+            <h3 class="text-center">Nuevo Registro</h3>
+            <%= form_for @department, url: {action: "create"} do |f| %>
+            
+                    
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <%= f.text_field :name, placeholder: "nombre del departamento", class: "form-control" %>
+                </div>
+                <div class="form-group">
+                    <label for="apartment_manager">Encargado del departamento:</label>
+                    <%= f.text_field :apartment_manager, placeholder: "ingrese nombre completo", class: "form-control" %>
+                    <small class="form-text text-muted">Ingrese este campo adecuadamente para los reportes, por ejemplo podria ser Ing. Jardines Jardines Jose.</small>
+                </div>
+                <%= f.submit "Guardar", class: "btn btn-success" %>
+            <% end %>              
+        </div>
+    </div>
+
+    <%= render 'layouts/footer' %>
+</div>

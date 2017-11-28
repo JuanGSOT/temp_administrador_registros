@@ -1,2 +1,99 @@
-<h1>Teachers#index</h1>
-<p>Find me in app/views/teachers/index.html.erb</p>
+<div class="grid-comp">
+<%= render "layouts/headerDate" %>
+<%= render "layouts/lateral" %>
+    <div class="container main">
+    <br>
+    <h1>Profesores</h1>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <%= form_tag teachers_path, :method => "get", id: "search-form", class: "row" do %>
+                    <div class="form-group col-8">
+                        <%= text_field_tag :search, params[:search], placeholder: "Ingrese código o nombre", class: "form-control", autocomplete: :off%>
+                    </div>
+                    <div class="col-4">
+                        <% if @teachers.present? %>
+                            <%= submit_tag "Buscar profesor", class: "btn btn-info" %>
+                        <% else %>
+                            <%= link_to "Buscar profesor", teachers_path ,class: "btn btn-info" %>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <div class="overflow">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Code</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Contrato</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% if @teachers.present? %>
+                        <%= render @teacher %>
+                    <% else %>
+                    <tr>
+                    <td colspan="5" class="text-center">No fue posible encontrar al profesor con <br> <strong> nombre o código: <%= params[:search] %></strong></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="my-5 p-3 col-12" style="border:1px solid gray; background:silver; border-radius:10px;">
+                        <div class="row">
+                            <div class="col-6 text-center">
+                                <input type="radio" name="" id="">Borrar
+                            </div>
+                            <div class="col-6 text-center">
+                                <input type="radio" name="" id="">Actualizar
+                            </div>
+                            <div class="form-inline col-12 justify-content-center">
+                                <label for="codig" class="mr-sm-2">Código del profesor => </label>
+                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="codig">
+                                <input type="submit" value="{ Borrar o Actualizar }" class="btn btn-warning">
+                                <a class="btn btn-warning" 
+                                data-confirm="Esta seguro de borrar este registro?" 
+                                rel="nofollow" 
+                                data-method="delete" href="/teachers/8">borrame</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <h3>Nuevo Registro</h3>
+                <%= form_for @teacher, url: {action: "create"} do |f| %>
+                    <div class="form-group">
+                        <%= f.label :code, "Código de profesor:", class: "col-form-label col-form-label-sm" %>
+                        <%= f.text_field :code, class: "form-control form-control-sm" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :name, "Nombre(s):", class: "col-form-label col-form-label-sm" %>
+                        <%= f.text_field :name, class: "form-control form-control-sm" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :surnames, "Apellidos:", class: "col-form-label col-form-label-sm" %>
+                        <%= f.text_field :surnames, class: "form-control form-control-sm" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :department_id, "Departamento:", class: "col-form-label col-form-label-sm" %>
+                        <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "custom-select" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :contract, "Contrato:", class: "col-form-label col-form-label-sm" %>
+                        <%= f.select :contract, [["Honorarios", 1], ["Plaza", 0]], {:include_blank => "Selecciona uno" }, class: "custom-select" %>
+                    </div>
+                    <%= f.hidden_field :status, :value => false %>
+                    <%= f.submit "Guardar", class: "btn btn-success" %>
+                <% end %>
+            </div>
+            
+        </div>
+    </div>
+    <%= render 'layouts/footer' %>
+</div>

@@ -1,10 +1,84 @@
 // Place all the styles related to the Proyector controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .botonera {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  a {
+    margin: 10px;
+  }
+}
+
+.bl-h {
+  height: auto !important;
+}
+
+.barra-lateral {
+    background-color: rgba(228, 228, 228, 0.61);
+    display: grid;
+    align-content: space-evenly;
+
+    position: sticky;
+    top: 0;
+    
+  }
+.vh-100 {
+  height: 100vh!important;
+} 
+
+.vh-auto {
+  height: auto!important;
+}
+
+  .barra-lateral > a > i {
+    font-size: 40px;
+  }
+
+  .barra-lateral > a  {
+    text-decoration: none!important;
+    color: #00cc00;
+
+    display:flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .cabecera {
+    background-color: #64DD17;
+    color: white;
+    height: 65px;
+    
+    margin: 0 0!important;
+    border-bottom: 10px solid silver;
+  }
+  // background-color: #1cd045;
+  // color: white;
+  // height: 30vh;
+  // display: flex;
+  // flex-flow: column;
+  // justify-content: center;
+  // align-items: center;
+  
+  .cabecera > .date {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+
+  .cabecera > a {
+    text-decoration: none;
+  }
+
+  .header-pr {
+    background-color: #1cd045;
+    color: white;
+    height: 30vh;
     display: flex;
     flex-flow: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
 }

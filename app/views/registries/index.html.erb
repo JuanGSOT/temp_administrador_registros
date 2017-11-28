@@ -1,2 +1,46 @@
-<h1>Registries#index</h1>
-<p>Find me in app/views/registries/index.html.erb</p>
+<div class="grid-comp">
+    <%= render "layouts/headerDate" %>
+    <%= render "layouts/lateral" %>
+    <div class="container main"><br>
+        <h2>Sistema de prestamo del material escolar</h2>
+        <h2 class="ml-5">Departamento de Desarrollo Academico</h2>
+        <br>
+        <h2>>>Material Prestado</h2>
+        <br>
+        <div class="container row">
+        <% @registry.each do |i| %>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="card my-3">
+            <div class="card-header ch-registry">Salon <%= i.classroom.name %> + <%= i.article.name %></div>
+            <div class="card-block row mx-0 py-2">
+                <div class="col-7">
+                    <%= ("#{i.teacher.surnames} #{i.teacher.name}").upcase %> <br>
+                    <%= i.loan %>
+                    <small class="text-muted"><strong>Departamento de:</strong></small>
+                    <small class="text-muted"><%= i.teacher.department.name %></small>
+                    <br>
+                    <%= link_to "Registrar devolución", i, method: :patch, class: "btn btn-success" %>
+                </div>
+                <div class="col-5 p-2">
+                    <div class="imagen" style="width:100%; height:100%; background:dodgerblue;"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <% end %>
+        <% if @registry.blank? %>
+        <div class="d-flex w-100 justify-content-center">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">Advertencia</div>
+                <div class="card-body">
+                    <h4 class="card-title">Sin registros actualmente</h4>
+                    <p class="card-text">Por el momento no se ha registrado el prestamo de un nuevo producto.</p>
+                </div>
+            </div>
+        </div>
+        <% end %>
+        
+        </div>
+    </div>
+    <%= render 'layouts/footer' %>
+</div>
