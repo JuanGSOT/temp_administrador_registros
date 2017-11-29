@@ -34,12 +34,18 @@ function optionBlank(val) {
 }
 
 $(document).ready(function () {
-  setTimeout(function () {
-    $(".notice, .alert").slideUp(3000).hide(4000);
-  }, 3000);
+  if ($(".alert").length === 1 || $(".notice").length === 1){
+    setTimeout(function () {
+      $(".notice, .alert").slideUp(3000).hide(4000);
+    }, 3000);
+  }
+
+  if ($("#date_time").length === 0) {
+    clearInterval(a);
+  }
 });
 
-setInterval(function() { 
+var a = setInterval(function() { 
   var d = new Date();
   var h = d.getHours();
   var hr = (h > 12 ? h - 12 : h);
@@ -503,7 +509,7 @@ function thisHour(){
   
     /* COMBOBOX PLUGIN DEFINITION
      * =========================== */
-    $.fn.combobox = function ( option ) {
+    jQuery.fn.combobox = function ( option ) {
       return this.each(function () {
         var $this = $(this)
           , data = $this.data('combobox')

@@ -95,6 +95,9 @@
     grid-template-areas: "header header"
     "main main"
     "footer footer" !important;
+    grid-template-rows: 30vh
+    1fr
+    65px;
   }
   .grid-comp {
     display: grid;
@@ -118,6 +121,15 @@
                         80px
                         1fr
                         65px;
+  }
+
+  .g-s{
+    grid-template-areas: "header"
+    "main"
+    "footer" !important;
+    grid-template-rows: 30vh
+    1fr
+    100px;
   }
   
   .grid-comp {
@@ -147,6 +159,13 @@
   .barra-lateral > a {
     justify-content: inherit;
     margin: 10px;
+  }
+
+  .f-2 {
+    display: flex;
+    flex-flow: column;
+    padding: 0px 30px;
+    justify-content: center;
   }
 }
 
