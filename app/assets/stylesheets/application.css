@@ -16,10 +16,6 @@
  *= require_self
  */
 
-  * {
-    font-family: 'Lato', sans-serif;
-  }
-  
   .form {
     border: 1px solid silver;
     padding: 15px;
@@ -121,7 +117,7 @@
                          "aside"
                          "main"
                          "footer";
-    grid-template-rows: 250px
+    grid-template-rows: 30vh
                         80px
                         1fr
                         65px;
@@ -131,7 +127,7 @@
     grid-template-areas: "header"
     "main"
     "footer" !important;
-    grid-template-rows: 250px
+    grid-template-rows: 30vh
     1fr
     100px;
   }
