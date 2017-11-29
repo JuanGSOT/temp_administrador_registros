@@ -46,6 +46,7 @@ GEM
     arel (8.0.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bootstrap-combobox (1.2.6)
     builder (3.2.3)
     byebug (9.1.0)
     capybara (2.16.1)
@@ -205,6 +206,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bootstrap-combobox (~> 1.2, >= 1.2.6)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

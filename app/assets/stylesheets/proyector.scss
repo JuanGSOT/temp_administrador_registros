@@ -7,11 +7,8 @@
   justify-content: center;
   a {
     margin: 10px;
+    white-space: normal;
   }
-}
-
-.bl-h {
-  height: auto !important;
 }
 
 .barra-lateral {
@@ -47,7 +44,6 @@
   .cabecera {
     background-color: #64DD17;
     color: white;
-    height: 65px;
     
     margin: 0 0!important;
     border-bottom: 10px solid silver;
@@ -76,7 +72,6 @@
   .header-pr {
     background-color: #1cd045;
     color: white;
-    height: 30vh;
     display: flex;
     flex-flow: column;
     justify-content: center;

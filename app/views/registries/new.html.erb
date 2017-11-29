@@ -14,12 +14,11 @@
                 </div>
                 <div class="form-group">
                     <%= f.label :article_id, "Material:", class: "control-label" %>
-                    <%= f.select :article_id, Article.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control" %>
+                    <%= f.select :article_id, Article.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox" %>
                 </div>
                 <div class="form-group">
-                    <label for="">Aula</label>
                     <%= f.label :classroom_id, "Aula:", class: "control-label" %>
-                    <%= f.select :classroom_id, Classroom.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control" %>
+                    <%= f.select :classroom_id, Classroom.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", :onChange=>"optionBlank(this.value);" %>
                 </div>
                 <%= f.submit "Guardar Registro", class: "btn btn-primary", onclick: "thisHour();" %>
             <% end %>
@@ -36,3 +35,8 @@
     </div>
     <%= render 'layouts/footer' %>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.combobox').combobox();
+  });
+</script>

@@ -36,6 +36,7 @@ gem 'material_icons'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'lazy_high_charts'
 gem  'time_diff'
+gem 'bootstrap-combobox', '~> 1.2', '>= 1.2.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
