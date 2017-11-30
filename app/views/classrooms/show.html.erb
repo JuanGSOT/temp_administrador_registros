@@ -1,0 +1,17 @@
+<div class="grid-comp">
+    <%= render 'layouts/headerDate' %>
+    <%= render 'layouts/lateral' %>
+
+    <div class="container main my-5">
+
+        <%= form_for @classroom, :method => :put, html: {class: "form"} do |f| %>
+        <div class="form-group">
+            <strong><%= f.label :name, "Nombre del salon: " %></strong>
+            <%= f.text_field :name, class: "form-control",:autofocus => true %>
+        </div>
+        <%= f.submit "Guardar", class: "btn btn-success btn-lg btn-block" %>
+        <% end %>
+          
+    </div>
+    <%= render 'layouts/footer' %>
+</div>

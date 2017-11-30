@@ -1,2 +1,40 @@
-<h1>Classrooms#index</h1>
-<p>Find me in app/views/classrooms/index.html.erb</p>
+<div class="grid-comp">
+    <%= render 'layouts/headerDate' %>
+    <%= render 'layouts/lateral' %>
+
+    <div class="container main my-4">
+    <div class="overflow o-100">
+        <table class="table table-striped table-hover table-sm table-responsive-sm">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Salon</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% @classroom.each do |t| %>
+            <tr>
+            <th scope="row"><%= t.id %></th>
+            <td><%= t.name %></td>
+            <td>
+            <%= link_to raw("<i class='btn btn-danger mi md-36 p-0' style='line-height:36px'>&#xE92B;</i>"), 
+            t, method: :delete, 
+            data: { confirm: 'Estas seguro de eliminarlo?' } %>
+            </td>
+            <td>
+            <%= link_to raw("<i class='btn btn-warning mi md-36 md-light p-0' style='line-height:36px'>&#xE150;</i>"), classroom_path(t)%>
+            </td>
+            </tr>
+            <% end %>
+
+        </tbody>
+        </table>
+    </div>
+    <%= link_to '+', new_classroom_path , class: "btn btn-success btn-lg btn-block d-flex justify-content-center font-weight-bold mt-1" %>
+    </div>
+
+    <%= render 'layouts/footer' %>
+</div>

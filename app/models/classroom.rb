@@ -9,4 +9,5 @@
 #
 
 class Classroom < ApplicationRecord
+    validates :name, presence: {message: "No debe dejar el campo de Salon en blanco."}, uniqueness: {message: "Intente de nuevo, los datos ingresados ya existen."}
 end

@@ -16,6 +16,10 @@
  *= require_self
  */
 
+  * {
+    font-family: 'Lato', sans-serif;
+  }
+
   .form {
     border: 1px solid silver;
     padding: 15px;
@@ -117,8 +121,8 @@
                          "aside"
                          "main"
                          "footer";
-    grid-template-rows: 30vh
-                        80px
+    grid-template-rows: auto
+                        auto
                         1fr
                         65px;
   }
@@ -127,7 +131,7 @@
     grid-template-areas: "header"
     "main"
     "footer" !important;
-    grid-template-rows: 30vh
+    grid-template-rows: auto
     1fr
     100px;
   }
@@ -138,8 +142,8 @@
                          "aside"
                          "main"
                          "footer";
-    grid-template-rows: 150px
-                        80px
+    grid-template-rows: auto
+                        auto
                         1fr
                         65px;
   }
@@ -154,6 +158,9 @@
     display: flex!important;
     justify-content: center;
     position: relative;
+    
+    font-size: .9rem;
+    flex-wrap: wrap;
   }
 
   .barra-lateral > a {
