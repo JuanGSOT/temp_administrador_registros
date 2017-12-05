@@ -40,22 +40,7 @@ $(document).ready(function () {
       $(".notice, .alert").slideUp(3000).hide(4000);
     }, 3000);
   }
-
-  if ($("#date_time").length === 0) {
-    clearInterval(a);
-  }
 });
-
-var a = setInterval(function() { 
-  var d = new Date();
-  var h = d.getHours();
-  var hr = (h > 12 ? h - 12 : h);
-  var mi = d.getMinutes();
-  var s = d.getSeconds();
-  var time =  (hr<10?" 0":" ") + hr + ":" + (mi<10?"0":"") + mi + ":" + (s<10?"0":"") + s + " " + (h > 11 ? "pm" : "am");
-  var selector = document.getElementById("date_time");
-  selector.innerHTML = time;
-}, 1000);
 
 function thisHour(){
   var t = new Date();
