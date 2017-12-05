@@ -10,25 +10,42 @@
                 <input type="hidden" name="registry[loan]" id="registry_loan">
                 <div class="form-group">
                     <%= f.label :teacher_id, "Código de profesor:", class: "control-label" %>
-                    <%= f.text_field :teacher_id, class: "form-control" %>
+                    <%= f.text_field :teacher_id, class: "form-control", required: true %>
                 </div>
                 <div class="form-group">
                     <%= f.label :article_id, "Material:", class: "control-label" %>
-                    <%= f.select :article_id, Article.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox" %>
+                    <%= f.select :article_id, Article.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", required: true %>
                 </div>
                 <div class="form-group">
                     <%= f.label :classroom_id, "Aula:", class: "control-label" %>
-                    <%= f.select :classroom_id, Classroom.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", :onChange=>"optionBlank(this.value);" %>
+                    <%= f.select :classroom_id, Classroom.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", :onChange=>"optionBlank(this.value);", required: true %>
                 </div>
                 <%= f.submit "Guardar Registro", class: "btn btn-primary", onclick: "thisHour();" %>
             <% end %>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="container">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus deleniti ex qui corrupti! Exercitationem incidunt pariatur minima asperiores magni. Consectetur excepturi eos officia reiciendis architecto eligendi dicta aliquid dolore repellat.</p>
-                <div class="imagen-box">
-                logo
-                </div>
+             <div class="overflow">
+             <h3 class="font-weight">Lista de Profesores</h3>
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Code</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Contrato</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% if @teachers = Teacher.all.order('code ASC') %>
+                        <%= render 'teachers/teacher' %>
+                    <% else %>
+                    <tr>
+                    <td colspan="5" class="text-center">No fue posible encontrar al profesor con <br> <strong> nombre o código: <%= params[:search] %></strong></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
             </div>
         </div>
         </div>

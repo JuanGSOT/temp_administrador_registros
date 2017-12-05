@@ -1,0 +1,25 @@
+<%= form_for @teacher_find, url: {action: "update"} do |f| %>
+    <div class="form-group">
+        <%= f.label :code, "Código de profesor:", class: "col-form-label col-form-label-sm" %>
+        <%= f.text_field :code, class: "form-control form-control-sm", value: @teacher_find.code %>
+    </div>
+    <div class="form-group">
+        <%= f.label :name, "Nombre(s):", class: "col-form-label col-form-label-sm" %>
+        <%= f.text_field :name, class: "form-control form-control-sm", value: @teacher_find.name %>
+    </div>
+    <div class="form-group">
+        <%= f.label :surnames, "Apellidos:", class: "col-form-label col-form-label-sm" %>
+        <%= f.text_field :surnames, class: "form-control form-control-sm", value: @teacher_find.surnames %>
+    </div>
+    <div class="form-group">
+        <%= f.label :department_id, "Departamento:", class: "col-form-label col-form-label-sm" %>
+        <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "custom-select", selected: @teacher_find.department_id %>
+    </div>
+    <div class="form-group">
+        <%= f.label :contract, "Contrato:", class: "col-form-label col-form-label-sm" %>
+        <% @temp = @teacher_find.contract && 1 || 0 %>
+        <%= f.select :contract, [["Plaza", 0], ["Honorarios", 1]], {:include_blank => "Selecciona uno" }, class: "custom-select", selected: @temp %>
+    </div>
+    <%= f.hidden_field :status, :value => @teacher_find.status %>
+    <%= f.submit "Actualizar", class: "btn btn-success" %>
+<% end %>

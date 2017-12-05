@@ -1,0 +1,16 @@
+<%= form_for @article_find, url: {action: "update"} do |f| %>
+    <div class="form-group">
+        <%= f.label :name, "Nombre" %>
+        <%= f.text_field :name, class: "form-control", value: @article_find.name %>
+    </div>
+    <div class="form-group">
+        <%= f.label :details, "Marca y Modelo" %>
+        <%= f.text_field :details, class: "form-control", value: @article_find.details %>
+        <small class="text-muted">Ejemplo: Epson, V11H694020</small>
+    </div>
+    <div class="form-group">
+        <%= f.label :description, "Descripcion" %>
+        <%= f.text_area :description, class: "form-control", rows: 2, text: @article_find.description  %>
+    </div>
+    <%= f.submit "Actualizar", class: "btn btn-success" %>
+<% end %>

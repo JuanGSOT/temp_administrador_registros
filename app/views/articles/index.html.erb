@@ -4,50 +4,16 @@
     <div class="container main">
         <br>
         <h1>Materiales</h1>
-        <p class="text-center">
-        <label for="mat">Eliga una opción:</label>
-        <select id="mat" class="custom-select">
-            <option value="0">Todos</option>
-            <option value="1">Proyectores</option>
-            <option value="2">Cables</option>
-            <option value="3">Cafetera</option>
-        </select>
-        </p>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-10">
-                <div class="container row">
-                    <% @articles.each do |art| %>
-                        <div class="
-                        col-xs-12 
-                        col-sm-12 
-                        col-md-12
-                        col-lg-6 my-2">
-                        <div class="card">
-                            <h4 class="card-header" style="background: #FF9800; color: white; font-weight:bold;">
-                                <%= (art.name).capitalize %>
-                            </h4>
-                            <div class="card-block p-3" style="background: #FFE0B2">
-                                <h4 class="card-title">
-                                    Marca/Modelo: <br><%= art.details %>
-                                </h4>
-                                <div class="card-text">
-                                    Ultimo mantenimiento: DD/MM/YYYY  <br>  Tiempo en servicio: HH:MM <br>
-                                    <hr>
-                                    Descripcion: <br>
-                                    <%= art.description %>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-around" style="background:#FFC107">
-                                <button class="btn btn-info"><i class="mi md-light" style="line-height:">&#xE150;</i>Editar</button>
-                                <button class="btn btn-danger"><i class="mi">&#xE92B;</i>Eliminar</button>
-                            </div>
-                        </div>
-                        </div>
-                    <% end %>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+            
+            <% if @article_find %>
+            <!-- Form update-->
+                <%= render 'articles/update' %>
+            <!-- Form update-->
+            <% else %>
+            <!-- Form new -->
                 <%= form_for(@article) do |f| %>
                 <div class="form-group">
                     <%= f.label :name, "Nombre" %>
@@ -62,12 +28,40 @@
                     <%= f.label :description, "Descripcion" %>
                     <%= f.text_area :description, class: "form-control", rows: 2 %>
                 </div>
-
                 <%= f.submit "Guardar", class: "btn btn-success" %>
-                        
                 <% end %>
-                  
+            <!-- Form new -->
+            <% end %>
             </div>
+
+            <!-- Cards Article -->
+            <% @articles.each do |art| %>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+                    <div class="card border-success mb-3" style="max-width: 20rem;">
+                    <div class="card-header bg-transparent border-success d-flex justify-content-between">
+                        <div>
+                            <%= (art.name).capitalize %>
+                        </div>
+                        <div>
+                            <a href="/articles/<%= art.id %>" style="line-height: 1px; color: #2962FF"><i class="mi md-18">&#xE150;</i></a>
+                            <%= link_to raw("<i class='mi md-18 md-black'>&#xE92B;</i>"), art, method: :delete, data: { confirm: 'Estas seguro de eliminarlo?' }, style: "line-height: 1px; color: red" %>
+                        </div>
+                    </div>
+                    <div class="card-body text-success" style="height: 175px">
+                        <h4 class="card-title"><%= art.details %></h4>
+                        <div class="card-text">
+                            Mantenimiento: <br>
+                            DD/MM/YYYY <br>
+                            En servicio: <br>
+                            HH:MM
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-success text-muted text-truncate" style="height:80px; overflow-y:auto; white-space:normal"><p><%= art.description %></p></div>
+                    </div>
+                </div>
+            <% end %>
+            <!-- Cards Article -->
+
         </div>
     </div>
     <%= render 'layouts/footer' %>

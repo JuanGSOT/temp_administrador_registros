@@ -10,21 +10,20 @@
         <div class="container row">
         <% @registry.each do |i| %>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-            <div class="card my-3">
-            <div class="card-header ch-registry">Salon <%= i.classroom.name %> + <%= i.article.name %></div>
-            <div class="card-block row mx-0 py-2">
-                <div class="col-7">
+            <div class="card">
+                <div class="card-header ch-registry">
+                    Salon <%= i.classroom.name %> + <%= i.article.name %>
+                </div>
+                <div class="card-body">
+                    
                     <%= ("#{i.teacher.surnames} #{i.teacher.name}").upcase %> <br>
-                    <%= i.loan %>
-                    <small class="text-muted"><strong>Departamento de:</strong></small>
+                    <%= i.loan %> <br>
+                    <small class="text-muted"><strong>Departamento de:</strong></small> <br>
                     <small class="text-muted"><%= i.teacher.department.name %></small>
                     <br>
-                    <%= link_to "Registrar devolución", i, method: :patch, class: "btn btn-success" %>
+                    <%= link_to raw("<i class='mi md-18'>&#xE163;</i> Registrar devolución"), i, method: :patch, class: "btn btn-success" %>
+                    
                 </div>
-                <div class="col-5 p-2">
-                    <div class="imagen" style="width:100%; height:100%; background:dodgerblue;"></div>
-                </div>
-            </div>
             </div>
         </div>
         <% end %>

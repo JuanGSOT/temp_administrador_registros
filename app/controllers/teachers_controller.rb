@@ -6,10 +6,9 @@ class TeachersController < ApplicationController
     else
       @teachers = Teacher.all.order('code ASC')
     end
-  end
-
-  def show
-    @teacher = Teacher.find(params[:id])
+    if params[:id]
+      @teacher_find = Teacher.find_by(code: params[:id])
+    end
   end
 
   def new
@@ -22,19 +21,34 @@ class TeachersController < ApplicationController
       flash[:notice] = "registro de profesor agregado."
       redirect_to teachers_path
     else
-      flash[:alert] = "algo salio mal al guardar"
+      #flash[:alert] = "algo salio mal al guardar!"
+      if @teacher.errors.any?  
+        @teacher.errors.each do |attr, msg|  
+          flash[:alert] = msg
+        end 
+      end 
       redirect_to root_path
     end
   end
 
   def edit
+    
   end
 
   def update
+      @teacher_find = Teacher.find_by(code: params[:id])
+    
+      if @teacher_find.update_attributes(teacher_params)
+        flash[:notice] = "registro de profesor actualizado."
+        redirect_to teachers_path
+      else
+        flash[:alert] = "algo salio mal al actualizar!"
+        redirect_to root_path
+      end
   end
 
   def destroy
-    @teacher_D=Teacher.find(params[:id])
+    @teacher_D=Teacher.find_by(code: params[:id])
     @teacher_D.destroy
     
       flash[:notice] = "registro eliminado"

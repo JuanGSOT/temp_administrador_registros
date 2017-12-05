@@ -65,6 +65,20 @@ function thisHour(){
   $("#registry_loan").val(now);
 }
 
+function changeHref(){
+  var a = $("#codig").val();
+  var b = "/teachers/" + a;
+  $("#trigger-du").attr("href", b);
+}
+
+function funA() {
+  $("#del").css("display","none");
+  $("#upd").css("display","block");
+}
+function funB(){
+  $("#upd").css("display","none");
+  $("#del").css("display","block");
+}
 
 /* =============================================================
  * bootstrap-combobox.js v1.1.8

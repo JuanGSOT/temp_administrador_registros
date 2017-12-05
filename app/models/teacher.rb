@@ -16,6 +16,7 @@
 class Teacher < ApplicationRecord
     belongs_to :department
 
+    validates :code, uniqueness: { message: "Recuerde el código de profesor es unico!"}
     	
     def self.search(search)
         where("code LIKE ? OR name LIKE ?", "%#{search}%", "%#{search}%") 

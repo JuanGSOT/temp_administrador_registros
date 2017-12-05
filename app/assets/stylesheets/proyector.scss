@@ -18,19 +18,23 @@
 
     position: sticky;
     top: 0;
-    
+    height: auto;
   }
-.vh-100 {
-  height: 100vh!important;
-} 
 
-.vh-auto {
-  height: auto!important;
-}
-
-  // .barra-lateral > a > i {
-  //   font-size: 2.5rem;
-  // }
+  @media screen and (max-width: 670px){
+    .barra-lateral {
+      height: auto!important;
+    }
+  }
+  .vh-100 {
+    height: 100vh;
+  } 
+  
+  @media screen and (max-width: 767px) {
+    .img-fluid{
+      max-width: 40%!important;
+    }
+  }
 
   .barra-lateral > a  {
     text-decoration: none!important;

@@ -42,55 +42,57 @@
                 </table>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="my-5 p-3 col-12" style="border:1px solid gray; background:silver; border-radius:10px;">
-                        <div class="row">
-                            <div class="col-6 text-center">
-                                <input type="radio" name="" id="">Borrar
+                <div class="row my-3">
+                    <div class="p-2 col-12" style="border:1px solid #00BCD4; background:#4DD0E1; border-radius:10px;">
+                    
+                        <!-- switch control -->
+                        <div class="custom-controls-stacked d-flex justify-content-center flex-row">
+                            <label class="custom-control custom-radio">
+                                <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input" onclick="funA();">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Actualizar</span>
+                            </label>
+                            <label class="custom-control custom-radio">
+                                <input id="radioStacked2" name="radio-stacked" type="radio" class="custom-control-input" onclick="funB();">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Borrar</span>
+                            </label>
+                        </div>
+                        <!-- switch control -->                            
+
+                        <div class="form-inline d-flex justify-content-center">
+                            <label for="codig" class="mr-sm-2">Código del profesor => </label>
+
+                            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="codig">
+
+                            <div id="upd">
+                                <a id="trigger-du" href="" class="btn btn-warning" onclick="changeHref();">Actualizar</a>
                             </div>
-                            <div class="col-6 text-center">
-                                <input type="radio" name="" id="">Actualizar
-                            </div>
-                            <div class="form-inline col-12 justify-content-center">
-                                <label for="codig" class="mr-sm-2">Código del profesor => </label>
-                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="codig">
-                                <input type="submit" value="{ Borrar o Actualizar }" class="btn btn-warning">
-                                <a class="btn btn-warning" 
+                            
+                            <div id="del" style="display:none;">
+                                <a id="trigger-du" class="btn btn-warning" 
                                 data-confirm="Esta seguro de borrar este registro?" 
                                 rel="nofollow" 
-                                data-method="delete" href="/teachers/8">borrame</a>
+                                data-method="delete" href="" onclick="changeHref();">Borrar</a>
                             </div>
+
+                            
+                            <script>
+                            
+                            </script>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-sm-4 my-3">
+            <% if @teacher_find %>
+                <h3>Actualizar registro</h3>
+                <%= render 'teachers/update' %>
+            <% else %>
                 <h3>Nuevo Registro</h3>
-                <%= form_for @teacher, url: {action: "create"} do |f| %>
-                    <div class="form-group">
-                        <%= f.label :code, "Código de profesor:", class: "col-form-label col-form-label-sm" %>
-                        <%= f.text_field :code, class: "form-control form-control-sm" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :name, "Nombre(s):", class: "col-form-label col-form-label-sm" %>
-                        <%= f.text_field :name, class: "form-control form-control-sm" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :surnames, "Apellidos:", class: "col-form-label col-form-label-sm" %>
-                        <%= f.text_field :surnames, class: "form-control form-control-sm" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :department_id, "Departamento:", class: "col-form-label col-form-label-sm" %>
-                        <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "custom-select" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :contract, "Contrato:", class: "col-form-label col-form-label-sm" %>
-                        <%= f.select :contract, [["Honorarios", 1], ["Plaza", 0]], {:include_blank => "Selecciona uno" }, class: "custom-select" %>
-                    </div>
-                    <%= f.hidden_field :status, :value => false %>
-                    <%= f.submit "Guardar", class: "btn btn-success" %>
-                <% end %>
+                <%= render 'teachers/new' %>
+            <% end %>
             </div>
             
         </div>
