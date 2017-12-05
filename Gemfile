@@ -31,12 +31,12 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'devise', '~> 4.3'
-gem 'material_icons'
-gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'devise', '4.3.0'
+gem 'material_icons', '2.2.1'
+gem 'jquery-rails', '4.3.1'
 gem 'lazy_high_charts'
-gem  'time_diff'
-gem 'bootstrap-combobox', '~> 1.2', '>= 1.2.6'
+gem 'time_diff'
+gem 'bootstrap-combobox', "1.2.6"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
