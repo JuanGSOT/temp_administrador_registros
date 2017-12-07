@@ -19,6 +19,5 @@
         <%= f.label :contract, "Contrato:", class: "col-form-label col-form-label-sm" %>
         <%= f.select :contract, [["Honorarios", 1], ["Plaza", 0]], {:include_blank => "Selecciona uno" }, class: "custom-select" %>
     </div>
-    <%= f.hidden_field :status, :value => false %>
     <%= f.submit "Guardar", class: "btn btn-success" %>
 <% end %>

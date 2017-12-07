@@ -40,20 +40,47 @@
                     <div class="card border-success mb-3" style="max-width: 20rem;">
                     <div class="card-header bg-transparent border-success d-flex justify-content-between">
                         <div>
-                            <%= (art.name).capitalize %>
+                            <%= art.name %>
                         </div>
                         <div>
-                            <a href="/articles/<%= art.id %>" style="line-height: 1px; color: #2962FF"><i class="mi md-18">&#xE150;</i></a>
-                            <%= link_to raw("<i class='mi md-18 md-black'>&#xE92B;</i>"), art, method: :delete, data: { confirm: 'Estas seguro de eliminarlo?' }, style: "line-height: 1px; color: red" %>
+                        <!-- edicion -->
+                            <a href="/articles/<%= art.id %>" class="message edit px-2" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <i class="mi md-18">&#xE150;</i>
+                            </a>
+                            
+                            <%= link_to raw("<i class='mi md-18 md-black'>&#xE92B;</i>"), art, 
+                            method: :delete, 
+                            data: { confirm: 'Estas seguro de eliminarlo?' }, 
+                            class: "message destroy p-2",
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            :title => "Eliminar"%>
+                        <!-- edicion -->
                         </div>
                     </div>
-                    <div class="card-body text-success" style="height: 175px">
+                    <div class="card-body text-success" style="position: relative">
                         <h4 class="card-title"><%= art.details %></h4>
                         <div class="card-text">
+                            <!-- button modal -->
+                            <span class="build message" data-toggle="tooltip" data-placement="top" title="Registrar Mantenimiento">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalMaintenance" style="border:none">
+                                    <i class="mi">&#xE869;</i>
+                                </button>
+                            </span>
+                            <!-- button modal -->
+                            
                             Mantenimiento: <br>
-                            DD/MM/YYYY <br>
+                            
+                            <div style="text-indent: 1em">
+                                <%= art.maintenance.nil? ? raw("<div class='text-danger'>>> No registrado</div>") : art.maintenance.strftime('%a, %d %b %Y') %> <br>
+                            </div>
+                            
                             En servicio: <br>
-                            HH:MM
+                            
+                            <div style="text-indent: 1em">
+                                <%= art.service.nil? ? raw("<div class='text-danger'>>>Sin registrar<<</div>") : art.service.strftime('%H:%M:%S') %>
+                            </div>
+
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-success text-muted text-truncate" style="height:80px; overflow-y:auto; white-space:normal"><p><%= art.description %></p></div>
@@ -62,6 +89,27 @@
             <% end %>
             <!-- Cards Article -->
 
+            <!-- Modal Box-->
+            <div class="modal fade" id="modalMaintenance" tabindex="-1" role="dialog" aria-labelledby="modalMaintenanceLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMaintenanceLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- Modal Box-->
         </div>
     </div>
     <%= render 'layouts/footer' %>

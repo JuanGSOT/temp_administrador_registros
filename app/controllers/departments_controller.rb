@@ -1,32 +1,6 @@
 class DepartmentsController < ApplicationController
   def index
-    @chart3 = LazyHighCharts::HighChart.new('pie') do |f|
-      f.chart({:defaultSeriesType=>"pie" , :margin=> [40, 200, 60, 170]} )
-      f.series({:type=> 'pie', :name=> 'Prestamos a profesores', :data=> [ ['Pantalla',   10.0],['Proyector',       46.8],
-           {
-              :name=> 'Cables',    
-              :y=> 12.8,
-              :sliced=> true,
-              :selected=> true
-           },
-           ['Tazas',    8.5]
-        ]
-      })
-      f.options[:title][:text] = "Prestamos realizados en el mes"
-      f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
-      f.plot_options(:pie=>{
-        :allowPointSelect=>true, 
-        :cursor=>"pointer" , 
-        :dataLabels=>{
-          :enabled=>true,
-          :format=> '<b>{point.name}</b>: {point.percentage:.1f} %',
-          :color=>"black",
-          :style=>{
-            :font=>"20px Trebuchet MS, Verdana, sans-serif"
-          }
-        }
-      })
-    end
+    
     @department = Department.new
     @departments = Department.all
     if params[:id]

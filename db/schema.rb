@@ -16,13 +16,16 @@ ActiveRecord::Schema.define(version: 20171123000051) do
     t.string "name"
     t.string "details"
     t.text "description"
-    t.boolean "status"
+    t.time "service", default: "2000-01-01 00:00:00"
+    t.datetime "maintenance"
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "classrooms", force: :cascade do |t|
     t.string "name"
+    t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,11 +39,10 @@ ActiveRecord::Schema.define(version: 20171123000051) do
 
   create_table "registries", force: :cascade do |t|
     t.integer "article_id"
-    t.datetime "loan"
-    t.datetime "return"
     t.integer "user_id"
     t.integer "teacher_id"
     t.integer "classroom_id"
+    t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_registries_on_article_id"
@@ -55,7 +57,7 @@ ActiveRecord::Schema.define(version: 20171123000051) do
     t.string "name"
     t.string "surnames"
     t.boolean "contract"
-    t.boolean "status"
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_teachers_on_department_id"

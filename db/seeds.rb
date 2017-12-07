@@ -6,22 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-for i in 1..4
+for i in (1..4)
     valor = "A#{i}"
-    Classroom.create(name: valor)
+    Classroom.create(name: valor, status: false)
 end
 
-Teacher.create(code: 1, name: "Juan Jose", surnames: "Garcia Gonzalo", contract: 1, status:	0, department_id: 1)
-Teacher.create(code: 2, name: "Luis", surnames: "Avila Camacho", contract:	0, status: 0, department_id: 1)
-Teacher.create(code: 3, name: "Margarita", surnames: "Conzuelo Vivian", contract: 0, status: 0, department_id: 1)
-Teacher.create(code: 4,	name: "Veronica", surnames: "Azcally Zu", contract: 1, status: 0, department_id: 1)
-# contract 1 = honorario : 0 = plaza
-Article.create(name: "proyecto 1", details: "A2YT3U2Y4I", description: "proyecto comun y corriente", status: 0)			
-Article.create(name: "Proyector 2", details: "BH102UANS9Q", description: "otro mas comun", status: 0)
-Article.create(name: "Proyector 3" , details: "CUQY284JWS", description: "el casi ultimo", status: 0)
-Article.create(name: "Proyector 4", details: "873GHDSJAQ", description: "este es el ultimo", status: 0)
-
-
-Registry.create(article_id: 1, loan: Time.now(), user_id: 1, teacher_id: 1, classroom_id: 1)
-
 Department.create(name: "Sistemas y Computación", apartment_manager: "Ing. Nuñez Ayala Abel")
+Department.create(name: "Ciencias Basicas", apartment_manager: "Ing. Lorem Ipsum")
+
+# contract 1 = honorario : 0 = plaza
+Article.create(name: "proyecto 1", details: "A2YT3U2Y4I", description: "proyecto comun y corriente")
+Article.create(name: "Proyector 2", details: "BH102UANS9Q", description: "otro mas comun")
+Article.create(name: "Proyector 3" , details: "CUQY284JWS", description: "el casi ultimo")
+Article.create(name: "Proyector 4", details: "873GHDSJAQ", description: "este es el ultimo")
+
+Teacher.create(code: 1, name: "Juan Jose",  surnames: "Garcia Gonzalo",     contract: true, department_id: 1)
+Teacher.create(code: 2, name: "Luis",       surnames: "Avila Camacho",      contract: false, department_id: 2)
+Teacher.create(code: 3, name: "Margarita",  surnames: "Conzuelo Vivian",    contract: false, department_id: 1)
+Teacher.create(code: 4,	name: "Veronica",   surnames: "Azcally Zu",         contract: true, department_id: 2)

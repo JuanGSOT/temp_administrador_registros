@@ -12,4 +12,10 @@
 #
 
 class Article < ApplicationRecord
+    before_save :modify_article
+
+    def modify_article
+        self.name = self.name.capitalize
+        self.details = self.details.upcase
+    end
 end

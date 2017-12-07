@@ -15,10 +15,9 @@
 //= require_tree .
 //= require jquery3
 //= require jquery_ujs
+//= require chartjs
+//= require sweetalert2
 //= require bootstrap-combobox
-//= require highcharts/highcharts
-//= require highcharts/highcharts-more
-//= require highcharts/highstock
 
 /* fechas - history*/
 function another(val) {
@@ -40,6 +39,7 @@ $(document).ready(function () {
       $(".notice, .alert").slideUp(3000).hide(4000);
     }, 3000);
   }
+  $('.message').tooltip();
 });
 
 function thisHour(){
@@ -48,7 +48,7 @@ function thisHour(){
   var time_now = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
   var now = date_now + " " + time_now;
   console.log(now);
-  $("#registry_loan").val(now);
+  //$("#registry_loan").val(now);
 }
 
 function changeHref(){

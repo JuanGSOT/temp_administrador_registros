@@ -34,9 +34,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '4.3.0'
 gem 'material_icons', '2.2.1'
 gem 'jquery-rails', '4.3.1'
-gem 'lazy_high_charts'
-gem 'time_diff'
-gem 'rails-assets-bootstrap-combobox', '1.1.8', source: 'https://rails-assets.org'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap-combobox', '1.1.8'
+  gem 'rails-assets-sweetalert2', '7.0.6'
+  gem 'rails-assets-chartjs', '2.7.1'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

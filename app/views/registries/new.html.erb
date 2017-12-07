@@ -7,20 +7,21 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <%= form_for(@registry) do |f| %>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
-                <input type="hidden" name="registry[loan]" id="registry_loan">
+                <!-- <input type="hidden" name="registry[loan]" id="registry_loan"> -->
                 <div class="form-group">
                     <%= f.label :teacher_id, "Código de profesor:", class: "control-label" %>
                     <%= f.text_field :teacher_id, class: "form-control", required: true %>
                 </div>
                 <div class="form-group">
                     <%= f.label :article_id, "Material:", class: "control-label" %>
-                    <%= f.select :article_id, Article.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", required: true %>
+                    <%= f.select :article_id, Article.where(status: false).collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", required: true %>
                 </div>
                 <div class="form-group">
                     <%= f.label :classroom_id, "Aula:", class: "control-label" %>
-                    <%= f.select :classroom_id, Classroom.all.collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", :onChange=>"optionBlank(this.value);", required: true %>
+                    <%= f.select :classroom_id, Classroom.where(status: false).collect {|x| [x.name, x.id]}, {:include_blank => "Selecciona uno" }, class: "form-control combobox", :onChange=>"optionBlank(this.value);", required: true %>
                 </div>
-                <%= f.submit "Guardar Registro", class: "btn btn-primary", onclick: "thisHour();" %>
+                <%= f.submit "Guardar Registro", class: "btn btn-primary" %>
+                <!-- , onclick: "thisHour();" -->
             <% end %>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -37,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% if @teachers = Teacher.all.order('code ASC') %>
+                    <% if @teachers = Teacher.all.order('code ASC').where(status: false) %>
                         <%= render 'teachers/teacher' %>
                     <% else %>
                     <tr>

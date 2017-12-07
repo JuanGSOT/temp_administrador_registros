@@ -1,3 +1,20 @@
-<footer class="footer d-flex justify-content-start pl-4">
+<footer class="footer d-flex px-4 justify-content-between">
+
         <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+
+        <% if Registry.all.where(:status => true).count > 0 %>
+        
+                <div class="footer-access">
+                        <%= link_to raw("<i class='mi md-28'>keyboard_arrow_right</i>Prestamo"),
+                        new_registry_path, class: 'btn btn-primary mx-3' %>
+
+                        <%= link_to raw("<i class='mi md-28'>access_alarm</i>Prestamos en curso"),
+                        registries_path, class: "btn btn-warning mx-3" %>
+
+                        <%= link_to raw("<i class='mi md-28'>equalizer</i>Registros"),
+                        history_registry_path, class: "btn btn-danger" %>
+                </div>
+
+        <% end %>
+
 </footer>

@@ -6,7 +6,7 @@ class CreateTeachers < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :surnames
       t.boolean :contract
-      t.boolean :status
+      t.boolean :status, :default => false
       t.timestamps
     end
   end
