@@ -4,8 +4,8 @@ class CreateArticles < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :details
       t.text :description
-      t.time :service, :default => 0
-      t.datetime :maintenance, :default => 0
+      t.time :service, 'time with time zone'
+      t.datetime :maintenance
       t.boolean :status, :default => false
 
       t.timestamps
