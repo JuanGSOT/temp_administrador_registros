@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20171123000051) do
     t.string "name"
     t.string "details"
     t.text "description"
-    t.time "service", default: "2000-01-01 00:00:00"
+    t.integer "service", default: 0
     t.datetime "maintenance"
     t.boolean "status", default: false
     t.datetime "created_at", null: false

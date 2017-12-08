@@ -1,0 +1,29 @@
+<!-- Modal Box-->
+            <div class="modal fade" id="modalMaintenance" tabindex="-1" role="dialog" aria-labelledby="modalMaintenanceLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMaintenanceLabel">Indique ultimo mantenimiento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <%= form_for :article, url: article_path(@article.id), method: :patch, remote: true do |f| %>
+                    <div class="form-group his-form">
+                        <%= f.label :maintenance, "Indique una fecha" %>
+                        <%= f.text_field :maintenance, class: "form-control", autocomplete: "off", value: Time.now%>
+                        <%= f.submit "Guardar", class: "btn btn-success" %>
+                    </div>
+                    <% end %>
+                      
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- Modal Box-->

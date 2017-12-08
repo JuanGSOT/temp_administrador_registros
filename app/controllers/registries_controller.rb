@@ -23,31 +23,56 @@ class RegistriesController < ApplicationController
 
   def service(registry)
     # obtener horas de servicio
-    difference_time = (registry.created_at - registry.updated_at).abs
-    difference_time = Time.at(difference_time).utc.strftime "%H:%M:%S"
-    
-    @service = registry.article
-    @service.update(service: difference_time)
+    inicio = registry.created_at.to_i
+    fin = registry.updated_at.to_i
+
+    # tener la diferencia
+    difference_time = ( fin - inicio )
+
+    data_s = registry.article
+    difference_time += data_s.service     # registrar la suma de lo actual registrado con el nuevo tiempo
+    data_s.update(service: difference_time)
   end
 
-  def create
-    @registry = Registry.create(registry_params)
-    # activa la lista de solicitudes hechas > prestamos en curso
-    @registry.status = true
+  def get_service(registry)
+    inicio = registry.created_at.to_i
+    fin = registry.updated_at.to_i
 
-    if @registry.save
-      self.trigger_teacher_article(@registry, true)
-      flash[:notice] = "prestamo guardado"
-      redirect_to root_path
+    diff = (fin - inicio)
+
+    if diff < 86400 
+      return Time.at(diff).utc.strftime "%H:%M:%S"
     else
-      flash[:alert] = "error al registrar datos"
-      redirect_to new_registry_path
+      return Time.at(diff).utc.strftime "#{(diff / 86400).to_i} dia(s) %H:%M:%S"
+    end
+
+  end
+  helper_method :get_service
+
+  def create
+    query_find = Registry.all.where('teacher_id like ? AND status like ?', registry_params['teacher_id'] , true).count
+    if query_find > 0
+        redirect_to new_registry_path
+        flash[:alert] = 'Este profesor ya tiene un registro'
+    else
+      @registry = Registry.create(registry_params)
+      # activa la lista de solicitudes hechas > prestamos en curso
+      @registry.status = true
+
+      if @registry.save
+        self.trigger_teacher_article(@registry, true)
+        flash[:notice] = 'prestamo guardado'
+        redirect_to root_path
+      else
+        flash[:alert] = 'error al registrar datos'
+        redirect_to new_registry_path
+      end
     end
   end
   
   def update
     @registry = Registry.find(params[:id])
-    # activa la lista de solicitudes hechas > prestamos en curso    
+    # desactiva la lista de solicitudes hechas > prestamos en curso    
     @registry.status = false
 
     if @registry.save
@@ -60,12 +85,14 @@ class RegistriesController < ApplicationController
         redirect_to root_path
       end
     else
-      flash[:alert] = "error al actualizar datos"
+      flash[:alert] = 'error al actualizar datos'
       redirect_to registries_path
     end
   end
 
   def history
+    @registryed = Registry.all.where(:status => false).order('id DESC')
+    @registry = Registry.search(params[:teacher_id], params[:page]).order('id DESC')
   end
 
 private

@@ -1,6 +1,7 @@
 // Place all the styles related to the Registries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* index - en curso */
 .ch-registry {
     background-color: #1bdc3b!important;
     color: white;
@@ -12,3 +13,25 @@
 .fg-return {
     width: 100%;
 }
+.menu {
+    border:1px solid gray; 
+    max-width:300px;
+    margin:0 auto;
+    padding:10px; 
+    border-radius: 10px; 
+}
+.menu:nth-of-type(2){
+    display: none;
+}
+
+.tables-reg {
+    width: auto;
+    white-space: nowrap;
+}
+
+/* history */
+.pagination {
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+  }

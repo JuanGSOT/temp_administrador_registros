@@ -31,9 +31,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'rails-i18n', '~> 5.0.0'
 gem 'devise', '4.3.0'
 gem 'material_icons', '2.2.1'
 gem 'jquery-rails', '4.3.1'
+gem 'will_paginate-bootstrap4', '0.1.3'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-combobox', '1.1.8'
@@ -47,6 +49,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'faker', '1.8.5'
 end
 
 group :development do

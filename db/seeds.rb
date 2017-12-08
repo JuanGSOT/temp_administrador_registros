@@ -15,12 +15,23 @@ Department.create(name: "Sistemas y Computación", apartment_manager: "Ing. Nuñ
 Department.create(name: "Ciencias Basicas", apartment_manager: "Ing. Lorem Ipsum")
 
 # contract 1 = honorario : 0 = plaza
-Article.create(name: "proyecto 1", details: "A2YT3U2Y4I", description: "proyecto comun y corriente")
+Article.create(name: "Proyector 1", details: "A2YT3U2Y4I", description: "proyecto comun y corriente")
 Article.create(name: "Proyector 2", details: "BH102UANS9Q", description: "otro mas comun")
 Article.create(name: "Proyector 3" , details: "CUQY284JWS", description: "el casi ultimo")
 Article.create(name: "Proyector 4", details: "873GHDSJAQ", description: "este es el ultimo")
 
-Teacher.create(code: 1, name: "Juan Jose",  surnames: "Garcia Gonzalo",     contract: true, department_id: 1)
-Teacher.create(code: 2, name: "Luis",       surnames: "Avila Camacho",      contract: false, department_id: 2)
+Teacher.create(code: 1, name: "Juan José",  surnames: "García Gonzalo",     contract: true, department_id: 1)
+Teacher.create(code: 2, name: "Luis",       surnames: "Ávila Camacho",      contract: false, department_id: 2)
 Teacher.create(code: 3, name: "Margarita",  surnames: "Conzuelo Vivian",    contract: false, department_id: 1)
 Teacher.create(code: 4,	name: "Veronica",   surnames: "Azcally Zu",         contract: true, department_id: 2)
+
+=begin
+(5..105).each do |t|
+    Teacher.create( code: t, name: (Faker::Name.name), surnames: (Faker::Name.last_name), contract: (Faker::Boolean.boolean), department_id: (Faker::Number.between(1, 2)) )
+    Article.create(name: "Proyector #{t}", details: "AAAAAAAA", description: "lorem ipsum")
+    Classroom.create(name: "A#{t}", status: false)
+end
+(5..105).each do |t|
+    Registry.create(article_id: t, user_id: 1, teacher_id: t, classroom_id: t, status: false, updated_at: Faker::Time.forward(Faker::Number.between(1,10), :morning))
+end
+=end

@@ -1,32 +1,18 @@
 <header class="cabecera row">
     <div class="col-xs-12 col-sm-2">
-    <%#= link_to 'Home', root_path, class: 'h2 ml-4 c-link' %>
     <%= link_to image_tag("tecnm", style: "height: 70px"), root_path, class: 'h2 ml-4 c-link' %>    
     </div>
-    <div class="clearfix hidden-sm-down col-sm-6"></div>
-    <div class="col-sm-2 date">
-        Fecha: <%= Time.now.strftime('%d/%m/%Y') %>
+    <div class="clearfix hidden-sm-down col-md-6"></div>
+    <div class="col-sm-3 col-md-2 date justify-content-center">
+        <div class="d-flex flex-column">
+            <span>Fecha: </span>
+            <span class="date-text"><%= Time.now.strftime('%d/%m/%Y') %></span>
+        </div>
     </div>
-    <div class="col-sm-2 date">
-        Hora: <span id="date_time"></span>
+    <div class="col-sm-3 col-md-2 date justify-content-center">
+        <div class="d-flex flex-column">
+            <span>Hora: </span>
+            <span id="date_time" class="date-text"></span>
+        </div>
     </div>
 </header>
-
-<script>
-
-$(document).ready(function(){
-
-  setInterval(function() { 
-    var d = new Date();
-    var h = d.getHours();
-    var hr = (h > 12 ? h - 12 : h);
-    var mi = d.getMinutes();
-    var s = d.getSeconds();
-    var time =  (hr<10?" 0":" ") + hr + ":" + (mi<10?"0":"") + mi + ":" + (s<10?"0":"") + s + " " + (h > 11 ? "pm" : "am");
-    var selector = document.getElementById("date_time");
-    selector.innerHTML = time;
-  }, 1000);
-
-});
-
-</script>

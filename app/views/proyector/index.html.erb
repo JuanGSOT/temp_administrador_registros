@@ -7,10 +7,9 @@
         <strong>A</strong>cademico</h2>
 </header>
     <%= render "layouts/lateral" %>
-    <div class="container main">
-        <strong class="h2" style="word-break: break-word">Bienvenid@ <%= current_user.email %></strong>
-        <br>
-        <br>
+    <div class="container main d-flex flex-column justify-content-center">
+        <strong class="h2 my-3" style="word-break: break-word">Bienvenid@ <%= current_user.email %></strong>
+
         <div class="row">
             <div class="col-sm-12 col-md-6 text-center">
                 <h1>Fecha</h1>
@@ -36,25 +35,9 @@
             </div>
         </div>
     </div>
-    <footer class="footer d-flex justify-content-start pl-4">
-        <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+    <footer class="footer d-flex justify-content-start">
+        <div class="container">
+            <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+        </div>
     </footer>
 </div>
-<script>
-
-$(document).ready(function(){
-
-  setInterval(function() { 
-    var d = new Date();
-    var h = d.getHours();
-    var hr = (h > 12 ? h - 12 : h);
-    var mi = d.getMinutes();
-    var s = d.getSeconds();
-    var time =  (hr<10?" 0":" ") + hr + ":" + (mi<10?"0":"") + mi + ":" + (s<10?"0":"") + s + " " + (h > 11 ? "pm" : "am");
-    var selector = document.getElementById("date_time");
-    selector.innerHTML = time;
-  }, 1000);
-
-});
-
-</script>

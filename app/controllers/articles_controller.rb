@@ -1,12 +1,15 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = Article.all.order('name ASC')
     @article = Article.new
     if params[:id]
       @article_find = Article.find(params[:id])
     end
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
   def create
     @article = Article.create(article_params)
     if @article.save
