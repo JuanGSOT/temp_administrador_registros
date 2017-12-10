@@ -41,6 +41,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-combobox', '1.1.8'
   gem 'rails-assets-sweetalert2', '7.0.6'
   gem 'rails-assets-chartjs', '2.7.1'
+  gem 'rails-assets-air-datepicker', '2.2.3'
 end
 
 group :development, :test do

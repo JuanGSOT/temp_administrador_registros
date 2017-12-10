@@ -18,13 +18,32 @@
 //= require chartjs
 //= require sweetalert2
 //= require bootstrap-combobox
+//= require air-datepicker
 
 /* fechas - history*/
 function another(val) {
-  if (val === '0') {
-    var menu = document.getElementsByClassName("menu");
-    menu[1].style.display = "block";
-    menu[0].style.display = "none";
+  var link = "/registries/history?option=";
+  
+  switch (val) {
+    case "1":
+      $("#act-btn a").attr("href", link + "1");
+      break;
+    case "2":
+      $("#act-btn a").attr("href", link + "2");
+      break;
+    case "3":
+      $("#act-btn a").attr("href", link + "3");
+      break;
+    case "4":
+      $("#act-btn a").attr("href", link + "4");
+      break;
+    case "5":
+      $('.menu').toggle('slow');
+      $('#filter').val(0);  
+      break;  
+    case 1:
+      $('.menu').toggle('slow');
+      break;
   }
 }
 
@@ -35,29 +54,36 @@ function optionBlank(val) {
 
 function thisHour(){
   var t = new Date();
-  var date_now = t.getDate() + "-" + (t.getMonth() + 1) + "-" + t.getFullYear()
-  var time_now = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
-  var now = date_now + " " + time_now;
+  var date_now = t.getDate() + '-' + (t.getMonth() + 1) + '-' + t.getFullYear()
+  var time_now = t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
+  var now = date_now + ' ' + time_now;
   console.log(now);
 }
 
 function changeHref(){
-  var a = $("#codig").val();
-  var b = "/teachers/" + a;
-  $("#trigger-du").attr("href", b);
+  var a = $('#codig').val();
+  var b = '/teachers/' + a;
+  $('#trigger-du').attr('href', b);
 }
 
 function funA() {
-  $("#del").css("display","none");
-  $("#upd").css("display","block");
+  $('#del').css('display','none');
+  $('#upd').css('display','block');
 }
 function funB(){
-  $("#upd").css("display","none");
-  $("#del").css("display","block");
+  $('#upd').css('display','none');
+  $('#del').css('display','block');
 }
 /* history registry */
-function graphic_hide(){
+function graphic_hide() {
+  if ($("#graphic-handle").hasClass("on")) {
+    $("#graphic-handle").text("Mostrar Tabla").removeClass("on").addClass("off");
+  } else{
+    $("#graphic-handle").text("Mostrar Graficos").removeClass("off").addClass("on");
+  }
+
   $('.hide-registry').toggle("slow");
+  lateral();
 }
 /* parcial lateral */
 function lateral(){
@@ -68,6 +94,20 @@ function lateral(){
   }
 }
 
+/* language datepicker */
+$.fn.datepicker.language['es'] = {
+  days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+  daysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+  daysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+  months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+  monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+  today: 'Hoy',
+  clear: 'Limpiar',
+  dateFormat: 'dd/mm/yyyy',
+  timeFormat: 'hh:ii aa',
+  firstDay: 0
+};
+
 $(document).ready(function () {
   if ($(".alert").length === 1 || $(".notice").length === 1){
     setTimeout(function () {
@@ -75,10 +115,9 @@ $(document).ready(function () {
     }, 3000);
   }
   
-  $('.combobox').combobox();
-
+  
   $('.message').tooltip();
-
+  
   if ($("#date_time").length !== 0){
     setInterval(function() { 
       var d = new Date();
@@ -98,8 +137,13 @@ $(document).ready(function () {
   $(window).resize(function () {
     lateral();
   });
-
+  
 });
 $(document).on('turbolinks:load', function () {
+  $('.combobox').combobox();
   lateral();
+    // Initialization
+  $('#since').datepicker();
+  // Access instance of plugin
+  $('#since').data('datepicker');
 });

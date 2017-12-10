@@ -14,14 +14,13 @@
     width: 100%;
 }
 .menu {
-    border:1px solid gray; 
-    max-width:300px;
-    margin:0 auto;
-    padding:10px; 
+    border: 1px solid gray; 
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 10px; 
     border-radius: 10px; 
-}
-.menu:nth-of-type(2){
-    display: none;
+    flex-basis: auto;
+    flex-grow: 1;
 }
 
 .tables-reg {
@@ -35,3 +34,20 @@
     align-items: center;
     justify-content: center;
   }
+
+.btn-info > a{
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+        text-decoration: none;    
+    }
+}
+
+/* history */
+@media screen and (max-width: 350px){
+    .his-form {
+        flex-direction: column!important;
+    }
+}

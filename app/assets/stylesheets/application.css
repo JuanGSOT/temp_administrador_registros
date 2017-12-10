@@ -15,6 +15,7 @@
  *= require bootstrap-combobox
  *= require_tree .
  *= require_self
+ *= require air-datepicker
  */
 
 * {
@@ -183,7 +184,7 @@ footer {
   }
 
   .barra-lateral {
-    background-color: #111;
+    background-color: #171717;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -194,7 +195,10 @@ footer {
   .barra-lateral a {
     padding: 0 10px;
   }
-
+  /* history menu */
+  .myFlex-column {
+    flex-direction: column;
+  }
   /* footer con botones del menu principal*/
   .footer {
     flex-direction: column;

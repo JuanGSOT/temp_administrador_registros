@@ -1,102 +1,121 @@
 <div class="grid-comp">
 <%= render "layouts/headerDate" %>
 <%= render "layouts/lateral" %>
-
     <div class="container-fluid main">
 
         <!-- Container simple -->
         <div class="container my-3">
             <h1>Historial</h1>
-            <!-- Control de vistas-->
-            <div class="d-flex flex-column" style="width: 200px">
-                <button class="btn btn-warning my-2">Generar reporte PDF</button>
-                <button class="btn btn-info my-2" onclick="graphic_hide()">Solo mostrar registros </button>
-            </div>
-            <!-- Control de vistas-->
-
-            <!-- Control de filtros-->
-            <div class="menu text-center mb-4">
-                <div class="form-group">
-                <label for="combobox">Registros a partir del periodo: </label>
-                <select name="combobox" id="" class="form-control" onchange="another(this.value);">
-                    <option value="week">semanal</option>
-                    <option value="month">mensual</option>
-                    <option value="semester">semestral</option>
-                    <option value="year">anual</option>
-                    <option value="0">otro</a></option>
-                </select>
+            <div class="d-flex align-items-center mb-4 myFlex-column">
+                <!-- Control de vistas-->
+                <div class="d-flex flex-column">
+                    <button class="btn btn-warning my-2">Generar reporte PDF</button>
+                    <button id="graphic-handle" class="btn btn-info my-2 on" onclick="graphic_hide()">Mostrar Graficos</button>
                 </div>
-                <input type="submit" value="Filtrar" class="btn btn-info">
-            </div>
+                <!-- Control de vistas-->
 
-            <div class="menu text-center mb-4">
-                <div class="form-group">
-                    <label for="">Registros marcados en las fechas entre:</label>
-                    <input type="datetime" name="" id="" class="form-control">
-                    <label for="">hasta:</label>                
-                    <input type="datetime" name="" id="" class="form-control">
+                <!-- Control de filtros-->
+                <div class="menu text-center">
+                    <div class="form-group">
+                    <label for="combobox">Registros a partir de: </label>
+                    <select name="combobox" id="filter" class="form-control" onchange="another(this.value);">
+                        <option value=0>Elige una opcion ...</option>
+                        <option value="1">Está Semana</option>
+                        <option value="2">Este Mes</option>
+                        <option value="3">El Semestre</option>
+                        <option value="4">El Año</option>
+                        <option value="5">Otra fecha</a></option>
+                    </select>
+                    </div>
+                    <button class="btn btn-info" id="act-btn">
+                     <%=link_to raw("<i class='mi'>&#xE152;</i> Filtrar"), :option => "1"%>
+                    </button>
                 </div>
-                <input type="submit" value="Filtrar" class="btn btn-info">            
-            </div>
-            <!-- Control de filtros-->
 
-            <div id="container" class="hide-registry" style="border:1px solid gray; border-radius:10px; display:none">
-                <% (0..50).each do |thing| %>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, doloremque?</p>
-                <% end %>
+                <div class="menu text-center mb-4" style="display: none; position: relative">
+                    <div class="form-group">
+                    <%= form_tag(history_registry_path, method: :get) do %>
+                        <label for="">Registros marcados en las fechas entre:</label>
+                        <%= text_field_tag :since, params[:since], :class => 'datepicker-here form-control',:data => { language: 'es' }, autocomplete: 'off' %>
+                        <label for="">hasta:</label>                
+                        <%= text_field_tag :until, params[:until], :class => 'datepicker-here form-control',:data => { language: 'es' }, autocomplete: 'off' %>
+                    </div>
+                    <%= submit_tag "Filtrar", class: "btn btn-info" %>
+                    <button type="button" class="btn btn-secondary" onclick="another(1);" style="position: absolute; bottom: 0; right: 0; margin: 10px;"><i class="mi md-18">&#xE863;</i></button>
+                    
+                    <% end %>
+                    
+                </div>
+                <!-- Control de filtros-->
             </div>
+            <% if @message %>
+                <h2 class="text-center"><%= @message %></h2>
+            <% end %>
         </div>
         <!-- Container simple -->
         
+        <!-- Chart -->
+            <div class="hide-registry" style="overflow-x: scroll">
+                    <div class="char-container" style="position: relative; height: 400px; width: 800px; margin: 0 auto;">
+                        <canvas id="myChart"></canvas>
+                    </div>
+            </div>
+        <!-- Chart -->
+        
         <!-- table -->
-        <div is="list" class="my-3 hide-registry tables-reg">
-        <%= form_tag(history_registry_path, method: :get) do %>
-        <div class="form-group his-form">
-            <%= text_field_tag :teacher_id, params[:teacher_id], placeholder: "Introduce id de profesor", class: "form-control", autocomplete: "off", pattern: '\d+', title: 'Solo digitos, por favor'%>
-            <%= submit_tag "Buscar", class: "btn btn-outline-info" %>
-        </div>
-        <% end %>
+        <div is="list" class="my-3 hide-registry tables-reg" style="display: none">
+            <%= form_tag(history_registry_path, method: :get) do %>
+                <div class="form-group his-form">
+                    <% if params[:option] %>
+                        <%= hidden_field_tag :option, params[:option], value: params[:option]%>
+                    <% end %>
+                    <%= text_field_tag :teacher_id, params[:teacher_id], placeholder: "Introduce id de profesor", class: "form-control", autocomplete: "off", pattern: '\d+', title: 'Solo digitos, por favor'%>
+                    <%= submit_tag "Buscar", class: "btn btn-outline-info" %>
+                </div>
+            <% end %>
 
-        <div class="my-3 hide-registry tables-reg">
-            <table class="table table-striped table-hover table-sm table-responsive-md">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Profesor ID</th>
-                <th scope="col">Profesor</th>
-                <th scope="col">Salon</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Material</th>
-                <th scope="col">Tiempo en uso</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <% for t in @registry %>
+            <div class="my-3 tables-reg">
+                <table class="table table-striped table-hover table-sm table-responsive-md">
+                <thead class="thead-dark">
                     <tr>
-                    <th scope="row"><%= t.id %></th>
-                    <% n = t.teacher %>
-                    <td><%= n.code %></td>                    
-                    <td><%= "#{n.surnames} #{n.name}" %></td>
-                    <td><%= t.classroom.name %> </td>
-                    <td><%= t.created_at.strftime '%a, %d %b %Y, %I:%M %P' %></td>
-                    <td><%= t.article.name %></td>
-                    <td><%= get_service(t) %></td>
+                    <th scope="col">#</th>
+                    <th scope="col">Profesor ID</th>
+                    <th scope="col">Profesor</th>
+                    <th scope="col">Salon</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Tiempo en uso</th>
                     </tr>
-                <% end %>
+                </thead>
+                <tbody>
 
-            </tbody>
-            </table>
+                    <% for t in @registry %>
+                        <tr>
+                        <th scope="row"><%= t.id %></th>
+                        <% n = t.teacher %>
+                        <td><%= n.code %></td>                    
+                        <td><%= "#{n.surnames} #{n.name}" %></td>
+                        <td><%= t.classroom.name %> </td>
+                        <td><%= t.created_at.strftime '%a, %d %b %Y, %I:%M %P' %></td>
+                        <td><%= t.article.name %></td>
+                        <td><%= get_service(t) %></td>
+                        </tr>
+                    <% end %>
+
+                </tbody>
+                </table>
+            </div>
+            <!-- table -->
+
+            <%= page_entries_info @registry %>
+            <%= will_paginate @registry, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>
-        <!-- table -->
-
-
-        <%= page_entries_info @registry, model: "Registros" %>
-        <%= will_paginate @registry, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-        </div>
-
 
     </div>
 
     <%= render 'layouts/footer' %>
 </div>
+<script>
+var ctx = $("#myChart");
+var myChart = new Chart(ctx, <%= @json %>);
+</script>

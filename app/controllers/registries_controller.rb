@@ -91,8 +91,91 @@ class RegistriesController < ApplicationController
   end
 
   def history
-    @registryed = Registry.all.where(:status => false).order('id DESC')
-    @registry = Registry.search(params[:teacher_id], params[:page]).order('id DESC')
+    if params[:teacher_id].present? && params[:option].present?
+      @registry = Registry.search(params[:teacher_id], params[:page], Registry.filtro(params[:option])).order('id DESC')
+      @message = titulo(params[:option])
+
+    elsif params[:option].present?
+      @registry = Registry.option(params[:option]).order('id DESC')
+      @message = titulo(params[:option])
+
+    elsif params[:since].present? && params[:until].present?
+      @registry = Registry.filtro_maestro(params[:since],params[:until]).order('id DESC')
+      @message = "Filtro entre las fechas #{params[:since]} - #{params[:until]}"
+
+    else
+      @registry = Registry.search(params[:teacher_id], params[:page]).where(:status => false).order('id DESC')
+      @message = "Todos los registros existentes"
+    end
+
+
+    @json = {
+      "type": "bar",
+      "data": 
+      {
+        "labels": 
+        [
+          "Red",
+          "Blue",
+          "Yellow",
+          "Green",
+          "Purple",
+          "Orange"
+        ],
+        "datasets": 
+        [      
+          {
+            "label": "# of Votes",
+            "data": 
+            [
+              12,
+              19,
+              3,
+              5,
+              2,
+              3
+            ],
+            "backgroundColor": 
+            [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
+            ],
+            "borderColor": 
+            [
+              "rgba(255,99,132,1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)"
+            ],
+            "borderWidth": 1
+          }
+        ]
+      },
+      "options": { "scales": { "yAxes": [{ "ticks": {"beginAtZero": true} }] } }
+    }.to_json.to_s.html_safe
+  end
+
+  def titulo(opc)
+    opc = opc.to_i
+    case opc
+    when 1
+      a = "Filtro por semana"
+    when 2
+      a = "Filtro por mes"
+    when 3
+      a = "Filtro por semestre"
+    when 4
+      a = "Filtro por año"
+    else
+      a = "Filtro especial"
+    end 
+    return a
   end
 
 private
@@ -102,3 +185,4 @@ private
   end
 
 end
+#Registry.search(2, 1, Registry.filtro(1)).order('id DESC')

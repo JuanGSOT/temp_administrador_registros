@@ -8,7 +8,7 @@
 
 for i in (1..4)
     valor = "A#{i}"
-    Classroom.create(name: valor, status: false)
+    Classroom.create(name: valor)
 end
 
 Department.create(name: "Sistemas y Computación", apartment_manager: "Ing. Nuñez Ayala Abel")
@@ -26,12 +26,12 @@ Teacher.create(code: 3, name: "Margarita",  surnames: "Conzuelo Vivian",    cont
 Teacher.create(code: 4,	name: "Veronica",   surnames: "Azcally Zu",         contract: true, department_id: 2)
 
 =begin
-(5..105).each do |t|
-    Teacher.create( code: t, name: (Faker::Name.name), surnames: (Faker::Name.last_name), contract: (Faker::Boolean.boolean), department_id: (Faker::Number.between(1, 2)) )
-    Article.create(name: "Proyector #{t}", details: "AAAAAAAA", description: "lorem ipsum")
-    Classroom.create(name: "A#{t}", status: false)
+(5..15).each do |t|
+    Teacher.create( code: t, name: (Faker::Name.name), surnames: (Faker::Name.last_name), contract: (Faker::Boolean.boolean), department_id: (Faker::Number.between(1, 2)), created_at: Faker::Date.between(Date.today, 2.year.ago) )
+    Article.create(name: "Proyector #{t}", details: "AAAAAAAA", description: "lorem ipsum", created_at: Faker::Date.between(Date.today, 2.year.ago))
+    Classroom.create(name: "A#{t}", created_at: Faker::Date.between(Date.today, 2.year.ago))
 end
-(5..105).each do |t|
-    Registry.create(article_id: t, user_id: 1, teacher_id: t, classroom_id: t, status: false, updated_at: Faker::Time.forward(Faker::Number.between(1,10), :morning))
+(1..15).each do |t|
+    Registry.create(article_id: t, user_id: 1, teacher_id: t, classroom_id: t, status: false, created_at: Faker::Time.forward( Faker::Number.between(1, 365), :all ) )
 end
 =end
