@@ -77,9 +77,9 @@ function funB(){
 /* history registry */
 function graphic_hide() {
   if ($("#graphic-handle").hasClass("on")) {
-    $("#graphic-handle").text("Mostrar Tabla").removeClass("on").addClass("off");
+    $("#graphic-handle").text("Mostrar Graficos").removeClass("on").addClass("off");
   } else{
-    $("#graphic-handle").text("Mostrar Graficos").removeClass("off").addClass("on");
+    $("#graphic-handle").text("Mostrar Tabla").removeClass("off").addClass("on");
   }
 
   $('.hide-registry').toggle("slow");

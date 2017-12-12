@@ -1,0 +1,15 @@
+<div class="grid-comp">
+<%= render 'layouts/headerDate' %>
+<%= render 'layouts/lateral' %>
+    <div class="container main">
+        <%= form_for @article, url: {action: "update"} do |f| %>
+            <div class="form-group">
+                <%= f.label :maintenance, "Indique una fecha" %>
+                <%= f.text_field :maintenance, class: "datepicker-here form-control", autocomplete: "off", data: {language: 'es'}, value: @article.maintenance.nil? ? "" : (@article.maintenance).strftime('%d/%m/%Y')%>
+            </div>
+            <%= f.submit "Guardar", class: "btn btn-primary" %>        
+        <% end %>
+    </div>
+
+    <%= render 'layouts/footer' %>
+</div>

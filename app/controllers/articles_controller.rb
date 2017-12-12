@@ -10,6 +10,9 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
   end
+  def modify
+    @article = Article.find(params[:id])
+  end
   def create
     @article = Article.create(article_params)
     if @article.save
@@ -42,6 +45,6 @@ class ArticlesController < ApplicationController
   end
 private
   def article_params
-    params.require(:article).permit(:name, :details, :description, :status)
+    params.require(:article).permit(:name, :details, :description, :status, :maintenance)
   end
 end

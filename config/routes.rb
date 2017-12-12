@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'registries/history', to: 'registries#history', as: 'history_registry'
     resources :registries
     get 'articles/:id', to: 'articles#index'
+    get 'articles/this/:id', to: 'articles#modify', as: 'edit_maintenance'
     resources :articles
     get 'teachers/:id', to: 'teachers#index'
     resources :teachers
