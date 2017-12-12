@@ -202,6 +202,7 @@ footer {
   /* footer con botones del menu principal*/
   .footer {
     flex-direction: column;
+    padding: 0;
   }
   .footer .btn {
     margin: 10px 0;
@@ -217,7 +218,19 @@ footer {
     padding: 0 30px;
   }
   /* footer con botones del menu principal*/
-  
+  .header-pr {
+    flex-flow: row;
+    flex-wrap: wrap;
+  }  
+  .a1 {
+    order: 1;
+  }
+  .a2{
+    order: 3;
+  }
+  .a3{
+    order: 2;
+  }
 }
 /************************************/
 /*        media query seccion       */

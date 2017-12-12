@@ -1,10 +1,20 @@
 <div class="grid">
 <header class="header-pr">
-        <h2>Sistema Integral de Material Escolar</h2> <br>
+<span class="a1">
+<%= image_tag('tecnm-2nd', width: '200') %>
+</span>
+
+<span class="a2">
+        <h2>Sistema de Préstamo de Video Proyectores</h2> <br>
         <h2 class="ml-5">
         <strong>D</strong>epartamento de 
         <strong>D</strong>esarrollo 
-        <strong>A</strong>cademico</h2>
+        <strong>A</strong>cadémico</h2>
+</span>
+
+<span class="a3">
+<%= image_tag('logosep', width: '200') %>
+</span>
 </header>
     <%= render "layouts/lateral" %>
     <div class="container main d-flex flex-column justify-content-center">
@@ -23,7 +33,7 @@
                 <%= image_tag("ittlahuac", class:"img-fluid") %>
                 </div>
                 <div class="col-md-6 col-xs-12 botonera">
-                <%= link_to raw("<i class='mi md-28'>keyboard_arrow_right</i>Prestamo"),
+                <%= link_to raw("<i class='mi md-28'>keyboard_arrow_right</i>Préstamo"),
                 new_registry_path, class: 'btn btn-outline-primary' %>
 
                 <%= link_to raw("<i class='mi md-28'>access_alarm</i>Prestamos en curso"),
