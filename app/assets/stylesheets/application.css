@@ -11,14 +11,13 @@
  * It is generally better to create a new file per style scope.
  *
  *= require material_icons
- *= require sweetalert2
  *= require bootstrap-combobox
+ *= require bootstrap-3-datepicker
  *= require_tree .
  *= require_self
- *= require air-datepicker
  */
-
-* {
+ 
+ * {
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -30,7 +29,7 @@
   position: relative;
 }
 
-.notice, .alert {
+.notice, .alert-rails {
   color: white;
   font-weight: bold;
   text-align: center;
@@ -39,14 +38,40 @@
   left: 0;
   right: 0;
   z-index: 1;
+
+  top: 0;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
+  animation: move 4s forwards;
 }
 
-.alert {
+.alert-rails {
+  border-top: 5px solid #fd2323;
   background-color: #EF5350;
 }
 
 .notice {
+  border-top: 5px solid dodgerblue;
   background-color: #29B6F6;
+}
+
+@keyframes move {
+  0% {
+    top: 0;
+  }
+  30% {
+    top: 80px;
+  }
+  90% {
+    top: 80px;
+    opacity: 1;
+  }
+  
+  100% {
+    top: -80px;    
+    opacity: .2;
+  }
 }
 
 .na-hidden{

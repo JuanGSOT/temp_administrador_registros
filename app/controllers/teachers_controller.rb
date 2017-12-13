@@ -53,10 +53,14 @@ class TeachersController < ApplicationController
   end
 
   def destroy
-    @teacher_D=Teacher.find_by(code: params[:id])
-    @teacher_D.destroy
-    
+    @teacher_D = Teacher.find_by(code: params[:id])
+    @check_tea = Teacher.find_by(code: params[:id]).teachers.count()
+    if @check_tea > 0
+      flash[:alert] = "No es posible borrar este profesor!"
+    else
+      @teacher_D.destroy
       flash[:notice] = "registro eliminado"
+    end  
       redirect_to teachers_path
   end
 

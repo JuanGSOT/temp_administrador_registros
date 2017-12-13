@@ -50,7 +50,8 @@ class RegistriesController < ApplicationController
   helper_method :get_service
 
   def create
-    query_find = Registry.all.where(:teacher_id => registry_params['teacher_id'], :status => true).count
+    query_find = Registry.all.where(:teacher_id => Teacher.find_by(code: registry_params['teacher_id']).id, :status => true).count
+
     if query_find > 0
         redirect_to new_registry_path
         flash[:alert] = 'Este profesor ya tiene un registro'
@@ -61,10 +62,13 @@ class RegistriesController < ApplicationController
 
       if @registry.save
         self.trigger_teacher_article(@registry, true)
-        flash[:notice] = 'prestamo guardado'
+        flash[:notice] = 'Prestamo guardado.'
         redirect_to root_path
       else
-        flash[:alert] = 'error al registrar datos'
+        @registry.errors.each do |attr, msg|  
+        #flash[:alert] = 'Error al registrar datos!'
+          flash[:alert] = "#{attr} #{msg}"
+        end
         redirect_to new_registry_path
       end
     end
@@ -79,6 +83,7 @@ class RegistriesController < ApplicationController
       self.trigger_teacher_article(@registry, false)
       self.service(@registry)
       flash[:notice] = "registro actualizado \n ya se encuentra disponible el #{@registry.article.name}"
+      
       if Registry.all.where(:status => true).count > 0
         redirect_to registries_path
       else
@@ -179,10 +184,7 @@ class RegistriesController < ApplicationController
   end
 
 private
-
   def registry_params
     params.require(:registry).permit(:article_id, :user_id, :teacher_id, :classroom_id)
   end
-
 end
-#Registry.search(2, 1, Registry.filtro(1)).order('id DESC')

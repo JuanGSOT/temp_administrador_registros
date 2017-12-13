@@ -16,9 +16,8 @@
 //= require jquery3
 //= require jquery_ujs
 //= require chartjs
-//= require sweetalert2
 //= require bootstrap-combobox
-//= require air-datepicker
+//= require bootstrap-3-datepicker
 
 /* fechas - history*/
 function another(val) {
@@ -63,7 +62,7 @@ function thisHour(){
 function changeHref(){
   var a = $('#codig').val();
   var b = '/teachers/' + a;
-  $('#trigger-du').attr('href', b);
+  $('.trigger-du').attr('href', b);
 }
 
 function funA() {
@@ -94,28 +93,22 @@ function lateral(){
   }
 }
 
-/* language datepicker */
-$.fn.datepicker.language['es'] = {
-  days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-  daysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-  daysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-  months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-  monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-  today: 'Hoy',
-  clear: 'Limpiar',
-  dateFormat: 'dd/mm/yyyy',
-  timeFormat: 'hh:ii aa',
-  firstDay: 0
-};
+/* datepicker i18n */
+$.fn.datepicker.dates['es'] = { 
+  days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'], 
+  daysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'], 
+  daysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], 
+  months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'], 
+  monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'], 
+  today: 'Hoy', 
+  clear: 'Limpiar', 
+  format: 'dd/mm/yyyy', 
+  titleFormat: 'MM yyyy', 
+  weekStart: 0 
+};   
 
 $(document).ready(function () {
-  if ($(".alert").length === 1 || $(".notice").length === 1){
-    setTimeout(function () {
-      $(".notice, .alert").slideUp(3000).hide(4000);
-    }, 3000);
-  }
-  
-  
+
   $('.message').tooltip();
   
   if ($("#date_time").length !== 0){
@@ -137,13 +130,16 @@ $(document).ready(function () {
   $(window).resize(function () {
     lateral();
   });
-  
 });
 $(document).on('turbolinks:load', function () {
   $('.combobox').combobox();
   lateral();
-    // Initialization
-  $('#since').datepicker();
-  // Access instance of plugin
-  $('#since').data('datepicker');
+  $('.form-group .date').datepicker({
+    format: "dd/mm/yyyy",
+    todayBtn: "linked",
+    language: "es",
+    autoclose: true,
+    todayHighlight: true,
+    toggleActive: true
+  });
 });

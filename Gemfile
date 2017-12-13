@@ -39,9 +39,8 @@ gem 'will_paginate-bootstrap4', '0.1.3'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-combobox', '1.1.8'
-  gem 'rails-assets-sweetalert2', '7.0.6'
   gem 'rails-assets-chartjs', '2.7.1'
-  gem 'rails-assets-air-datepicker', '2.2.3'
+  gem 'rails-assets-bootstrap-3-datepicker', '1.7.1'
 end
 
 group :development, :test do
@@ -51,12 +50,11 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'faker', '1.8.5'
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
 end
 
 group :development do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-  gem 'pg', '0.21.0'
   gem 'annotate'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -66,7 +64,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :production do
+group :development, :production do
   gem 'pg', '0.21.0'
 end
 

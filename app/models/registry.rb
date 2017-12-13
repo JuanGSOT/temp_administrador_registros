@@ -4,11 +4,10 @@
 #
 #  id           :integer          not null, primary key
 #  article_id   :integer
-#  loan         :datetime
-#  return       :datetime
 #  user_id      :integer
 #  teacher_id   :integer
 #  classroom_id :integer
+#  status       :boolean
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -17,6 +16,7 @@ class Registry < ApplicationRecord
   belongs_to :article, required: true
   belongs_to :teacher, required: true
   belongs_to :classroom, required: true
+  validates :teacher_id, :article_id, :classroom_id, presence: true
   
   scope :option, -> (option) {
     where(:created_at => Registry.filtro(option), :status => false).paginate(page: 1, per_page: 10).order('id DESC')
@@ -30,7 +30,7 @@ class Registry < ApplicationRecord
     if !option.nil?
       where(:created_at => option, :status => false, :teacher_id => teacher_id.to_i).paginate(page: page, per_page: 10).order('id DESC')
     elsif teacher_id
-      where("cast(teacher_id as text) like ?", "%#{teacher_id}%").paginate(page: page, per_page: 10).order('id DESC')
+      where(:teacher_id => Teacher.where("cast(code as text) like ?", "%#{teacher_id}%").ids).paginate(page: page, per_page: 10).order('id DESC')
     else
       Registry.paginate(page: page, per_page: 10).order('id DESC')
     end

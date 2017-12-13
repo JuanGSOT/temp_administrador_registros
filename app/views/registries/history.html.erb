@@ -33,12 +33,12 @@
                 </div>
 
                 <div class="menu text-center mb-4" style="display: none; position: relative">
-                    <div class="form-group">
                     <%= form_tag(history_registry_path, method: :get) do %>
+                    <div class="form-group">
                         <label for="">Registros marcados en las fechas entre:</label>
-                        <%= text_field_tag :since, params[:since], :class => 'datepicker-here form-control',:data => { language: 'es' }, autocomplete: 'off' %>
-                        <label for="">hasta:</label>                
-                        <%= text_field_tag :until, params[:until], :class => 'datepicker-here form-control',:data => { language: 'es' }, autocomplete: 'off' %>
+                            <%= text_field_tag :since, params[:since], :class => 'date form-control',autocomplete: 'off' %>
+                        <label for="">hasta:</label>
+                            <%= text_field_tag :until, params[:until], :class => 'date form-control', autocomplete: 'off' %>
                     </div>
                     <%= submit_tag "Filtrar", class: "btn btn-info" %>
                     <button type="button" class="btn btn-secondary" onclick="another(1);" style="position: absolute; bottom: 0; right: 0; margin: 10px;"><i class="mi md-18">&#xE863;</i></button>
@@ -93,7 +93,7 @@
                         <tr>
                         <th scope="row"><%= t.id %></th>
                         <% n = t.teacher %>
-                        <td><%= n.code %></td>                    
+                        <td><%= t.code %></td>                    
                         <td><%= "#{n.surnames} #{n.name}" %></td>
                         <td><%= t.classroom.name %> </td>
                         <td><%= t.created_at.strftime '%a, %d %b %Y, %I:%M %P' %></td>
@@ -110,7 +110,6 @@
             <%= page_entries_info @registry %>
             <%= will_paginate @registry, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>
-
     </div>
 
     <%= render 'layouts/footer' %>

@@ -8,7 +8,7 @@
 #  name          :string
 #  surnames      :string
 #  contract      :boolean
-#  status        :boolean
+#  status        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -17,6 +17,7 @@ class Teacher < ApplicationRecord
     belongs_to :department
 
     validates :code, uniqueness: { message: "Recuerde el código de profesor es unico!"}
+    validates :code, :name, :surnames, :department_id, :contract, presence: { message: "No puede dejar campos en blanco!"}
     before_create :nombres_upcase
     	
     def self.search(search)

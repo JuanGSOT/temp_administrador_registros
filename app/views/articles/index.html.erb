@@ -17,11 +17,11 @@
                 <%= form_for(@article) do |f| %>
                 <div class="form-group">
                     <%= f.label :name, "Nombre" %>
-                    <%= f.text_field :name, class: "form-control" %>
+                    <%= f.text_field :name, class: "form-control", required: true %>
                 </div>
                 <div class="form-group">
                     <%= f.label :details, "Marca y modelo" %>
-                    <%= f.text_field :details, class: "form-control" %>
+                    <%= f.text_field :details, class: "form-control", required: true %>
                     <small class="text-muted">Separe con una coma cada uno</small>
                 </div>
                 <div class="form-group">
@@ -44,7 +44,7 @@
                         </div>
                         <div>
                         <!-- edicion -->
-                            <a href="/articles/this/<%= art.id %>" class="message edit px-2" data-toggle="tooltip" data-placement="top" title="Editar">
+                            <a href="/articles/<%= art.id %>" class="message edit px-2" data-toggle="tooltip" data-placement="top" title="Editar">
                                 <i class="mi md-18">&#xE150;</i>
                             </a>
                             

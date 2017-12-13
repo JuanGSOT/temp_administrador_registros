@@ -7,7 +7,7 @@ class CreateArticles < ActiveRecord::Migration[5.1]
       t.integer :service, :default => 0
       t.datetime :maintenance
       t.boolean :status, :default => false
-
+      t.boolean :live, :default => true
       t.timestamps
     end
   end

@@ -1,8 +1,8 @@
 class DepartmentsController < ApplicationController
   def index
-    
     @department = Department.new
     @departments = Department.all
+    
     if params[:id]
       @department_find = Department.find(params[:id])
     end
@@ -10,13 +10,14 @@ class DepartmentsController < ApplicationController
 
   def create
     @department = Department.create(department_params)
+
     if @department.save
       flash[:notice] = "Departamento agregado."
-      redirect_to departments_path
     else
-      flash[:alert] = "algo salio mal al guardar!"
-      redirect_to root_path
+      flash[:alert] = "Algo salio mal al guardar!"
     end
+
+    redirect_to departments_path
   end
 
   def update
@@ -24,19 +25,25 @@ class DepartmentsController < ApplicationController
     
       if @department_find.update_attributes(department_params)
         flash[:notice] = "Departamento actualizado."
-        redirect_to departments_path
       else
-        flash[:alert] = "algo salio mal al actualizar!"
-        redirect_to root_path
+        flash[:alert] = "Algo salio mal al actualizar!"
       end
+      
+      redirect_to departments_path
   end
 
   def destroy
     @department = Department.find(params[:id])
-    @department.destroy
+    @check_dep = Department.find(params[:id]).teachers.count()
+
+    if @check_dep > 0
+      flash[:alert] = "Imposible de borrar!!! ya que existen profesores asignados a este departamento"
+    else
+      @department.destroy
+      flash[:notice] = "El registro del departamento ha sido eliminado"
+    end
     
-      flash[:alert] = "El registro del departamento ha sido eliminado"
-      redirect_to departments_path
+    redirect_to departments_path
   end
 
 private

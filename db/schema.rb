@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20171123000051) do
     t.integer "service", default: 0
     t.datetime "maintenance"
     t.boolean "status", default: false
+    t.boolean "live", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20171123000051) do
   create_table "classrooms", force: :cascade do |t|
     t.string "name"
     t.boolean "status", default: false
+    t.boolean "live", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

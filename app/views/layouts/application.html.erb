@@ -14,9 +14,9 @@
 
   <body>
     <% if notice %>
-      <p class="notice"><%= notice %></p>
+      <div class="notice"><i class="mi md-36">&#xE2BD;</i><span style="margin-left: 10px; position: relative; top: -10px;"><%= notice %></span></div>
     <% elsif alert %>
-      <p class="alert"><%= alert %></p>
+      <div class="alert-rails"><i class="mi md-36">&#xE000;</i><span style="margin-left: 10px; position: relative; top: -10px;"><%= alert %></span></div>
     <% end %>
 
     <%= yield %>
