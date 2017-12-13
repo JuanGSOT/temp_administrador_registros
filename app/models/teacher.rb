@@ -20,7 +20,7 @@ class Teacher < ApplicationRecord
     before_create :nombres_upcase
     	
     def self.search(search)
-        where("code LIKE ? OR name LIKE ?", "%#{search}%", "%#{search}%") 
+        where("cast(code as text) LIKE ? OR lower(name) LIKE lower(?) OR lower(surnames) LIKE lower(?)", "%#{search}%", "%#{search}%", "%#{search}%") 
     end
 
     def name_convert(my_name)

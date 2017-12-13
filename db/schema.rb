@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171123000051) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: :cascade do |t|
     t.string "name"
     t.string "details"
@@ -38,10 +41,10 @@ ActiveRecord::Schema.define(version: 20171123000051) do
   end
 
   create_table "registries", force: :cascade do |t|
-    t.integer "article_id"
-    t.integer "user_id"
-    t.integer "teacher_id"
-    t.integer "classroom_id"
+    t.bigint "article_id"
+    t.bigint "user_id"
+    t.bigint "teacher_id"
+    t.bigint "classroom_id"
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +55,7 @@ ActiveRecord::Schema.define(version: 20171123000051) do
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.integer "department_id"
+    t.bigint "department_id"
     t.integer "code"
     t.string "name"
     t.string "surnames"

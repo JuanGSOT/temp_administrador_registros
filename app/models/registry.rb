@@ -30,7 +30,7 @@ class Registry < ApplicationRecord
     if !option.nil?
       where(:created_at => option, :status => false, :teacher_id => teacher_id.to_i).paginate(page: page, per_page: 10).order('id DESC')
     elsif teacher_id
-      where('teacher_id LIKE ?', "%#{teacher_id}%").paginate(page: page, per_page: 10).order('id DESC')
+      where("cast(teacher_id as text) like ?", "%#{teacher_id}%").paginate(page: page, per_page: 10).order('id DESC')
     else
       Registry.paginate(page: page, per_page: 10).order('id DESC')
     end

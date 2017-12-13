@@ -50,7 +50,7 @@ class RegistriesController < ApplicationController
   helper_method :get_service
 
   def create
-    query_find = Registry.all.where('teacher_id like ? AND status like ?', registry_params['teacher_id'] , true).count
+    query_find = Registry.all.where(:teacher_id => registry_params['teacher_id'], :status => true).count
     if query_find > 0
         redirect_to new_registry_path
         flash[:alert] = 'Este profesor ya tiene un registro'
