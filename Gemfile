@@ -43,6 +43,11 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-3-datepicker', '1.7.1'
 end
 
+group :development, :test, :production do
+  gem 'dotenv-rails', '2.2.1'
+end
+gem 'recaptcha', require: "recaptcha/rails"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
