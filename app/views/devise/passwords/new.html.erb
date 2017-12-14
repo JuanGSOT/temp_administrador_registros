@@ -1,16 +1,29 @@
-<h2>Forgot your password?</h2>
+<div class="grid g-s">
+<header>
+  <h2 class="header-session"> <%= link_to "Olvido su contraseña?", root_path , class: "c-link" %> </h2>
+</header>
 
+<div class="container main my-5">
+<h3 class="mb-3"> Se le enviara instrucciones de 
+<h3 class="ml-2 my-3">recuperación al correo que indique:</h3>
+<div class="form" style="width: 480px; margin: 0 auto;">
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, class: "form-control", autocomplete: "off" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
+  
+  <%= f.submit "Recuperar contraseña", class: "btn btn-info btn-lg btn-block" %>
+
 <% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+</div>
+
+<footer class="footer footer-handle">
+  <%= render "devise/shared/links" %>
+</footer>
+
+</div>

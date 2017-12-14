@@ -1,5 +1,5 @@
 class Users::PasswordsController < Devise::PasswordsController
-  prepend_before_action :check_captcha, only: [:create]
+  prepend_before_action :check_captcha, only: [:update]
   # GET /resource/password/new
   # def new
   #   super
