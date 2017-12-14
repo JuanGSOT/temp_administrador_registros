@@ -42,11 +42,11 @@ class ArticlesController < ApplicationController
  
   def destroy
     @article = Article.find(params[:id])
-    @article.live = false
+    @article.update(live: false)
     
-    if @article.save
-      flash[:notice] = "Se ha eliminado satisfactoriamente."
-    end
+    
+    flash[:notice] = "Se ha eliminado satisfactoriamente."
+    
 
     redirect_to articles_path
   end

@@ -191,7 +191,7 @@ class RegistriesController < ApplicationController
     
     flash[:notice] = "El registro se ha eliminado!"
     
-    redirect_to history_registry__path
+    redirect_to history_registry_path
   end
 
 private
