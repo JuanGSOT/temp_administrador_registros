@@ -27,9 +27,9 @@
                         <option value="5">Otra fecha</a></option>
                     </select>
                     </div>
-                    <button class="btn btn-info" id="act-btn">
-                     <%=link_to raw("<i class='mi'>&#xE152;</i> Filtrar"), :option => "1"%>
-                    </button>
+                    <span id = "act-btn", class = "btn btn-info">
+                        <%= link_to raw("<i class='mi'>&#xE152;</i> Filtrar"), :option => 1 %>
+                    </span>
                 </div>
 
                 <div class="menu text-center mb-4" style="display: none; position: relative">
@@ -40,7 +40,9 @@
                         <label for="">hasta:</label>
                             <%= text_field_tag :until, params[:until], :class => 'date form-control', autocomplete: 'off' %>
                     </div>
-                    <%= submit_tag "Filtrar", class: "btn btn-info" %>
+                    <%= button_tag(type: "submit", class: "btn btn-info") do %>
+                        <i class='mi'>&#xE152;</i> Filtrar
+                    <% end %>
                     <button type="button" class="btn btn-secondary" onclick="another(1);" style="position: absolute; bottom: 0; right: 0; margin: 10px;"><i class="mi md-18">&#xE863;</i></button>
                     
                     <% end %>
@@ -85,6 +87,7 @@
                     <th scope="col">Fecha</th>
                     <th scope="col">Material</th>
                     <th scope="col">Tiempo en uso</th>
+                    <th scope="col"><i class="mi md-18">&#xE92B;</i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,12 +96,13 @@
                         <tr>
                         <th scope="row"><%= t.id %></th>
                         <% n = t.teacher %>
-                        <td><%= t.code %></td>                    
+                        <td><%= n.code %></td>                    
                         <td><%= "#{n.surnames} #{n.name}" %></td>
                         <td><%= t.classroom.name %> </td>
                         <td><%= t.created_at.strftime '%a, %d %b %Y, %I:%M %P' %></td>
                         <td><%= t.article.name %></td>
                         <td><%= get_service(t) %></td>
+                        <td><%= link_to raw("<i class='mi md-18'>&#xE876;</i>"), t, method: :delete, data: { confirm: 'Estas seguro de eliminarlo?' } %></td>
                         </tr>
                     <% end %>
 

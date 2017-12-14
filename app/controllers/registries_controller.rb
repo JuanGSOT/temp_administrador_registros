@@ -50,6 +50,7 @@ class RegistriesController < ApplicationController
   helper_method :get_service
 
   def create
+    # es necesario indica code de profesor ya que este es completamente distinto de su identificador en cada registro
     query_find = Registry.all.where(:teacher_id => Teacher.find_by(code: registry_params['teacher_id']).id, :status => true).count
 
     if query_find > 0
@@ -57,6 +58,7 @@ class RegistriesController < ApplicationController
         flash[:alert] = 'Este profesor ya tiene un registro'
     else
       @registry = Registry.create(registry_params)
+      @registry.teacher_id = Teacher.find_by(code: registry_params['teacher_id']).id
       # activa la lista de solicitudes hechas > prestamos en curso
       @registry.status = true
 
@@ -181,6 +183,15 @@ class RegistriesController < ApplicationController
       a = "Filtro especial"
     end 
     return a
+  end
+
+  def destroy
+    @registry = Registry.find(params[:id])
+    @registry.destroy
+    
+    flash[:notice] = "El registro se ha eliminado!"
+    
+    redirect_to history_registry__path
   end
 
 private

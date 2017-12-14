@@ -3,7 +3,7 @@ class TeachersController < ApplicationController
     @teacher = Teacher.new
 
     if params[:search]
-      @teachers = Teacher.search(params[:search]).order("created_at DESC")
+      @teachers = Teacher.search(I18n.transliterate(params[:search]).upcase).order("created_at DESC")
     else
       @teachers = Teacher.all.order('code ASC')
     end
@@ -54,9 +54,9 @@ class TeachersController < ApplicationController
 
   def destroy
     @teacher_D = Teacher.find_by(code: params[:id])
-    @check_tea = Teacher.find_by(code: params[:id]).teachers.count()
+    @check_tea = Registry.where(teacher_id: Teacher.find_by(code: params[:id]).id).count
     if @check_tea > 0
-      flash[:alert] = "No es posible borrar este profesor!"
+      flash[:alert] = "No es posible borrar este profesor! Ya que cuenta con registros en el historial."
     else
       @teacher_D.destroy
       flash[:notice] = "registro eliminado"
