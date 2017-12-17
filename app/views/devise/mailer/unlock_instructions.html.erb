@@ -1,7 +1,22 @@
-<p>Hello <%= @resource.email %>!</p>
+<div class="title">
+    <h1>Hola <%= @resource.email %>!</h1>
+</div>
 
-<p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
+<div class="container background-email">
+    <div class="content">
+ 
+        <div class="flex-text">
+            <p>Su cuenta ha sido bloqueda dado a un excesivo numero de accesos insatisfactorios.</p>
 
-<p>Click the link below to unlock your account:</p>
+            <p>De Click en el link de abajo para desbloquear su cuenta:</p>
 
-<p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></p>
+            <p><%= link_to 'Desbloquear mi cuenta', unlock_url(@resource, unlock_token: @token), class: "btn btn-danger btn-lg btn-block" %></p>
+        </div>
+    </div>
+</div>
+<style>
+.background-email{
+background:rgba(0,0,0,0) url(https://www.toptal.com/designers/subtlepatterns/patterns/wormz.png) repeat scroll 0 0;height:100vh;padding-top:60px;
+}
+.content{max-width:500px;min-height:300px;background:#64DD17;border-top:9px solid #33691E;border-bottom:10px solid #33691E;border-radius:.6em;padding:5px 20px;margin:0 auto;display:flex;justify-content:center;flex-direction:column}.title{background-color:#FFC107;text-align:center;padding-top:10px;align-content:center;color:#FF6F00;text-shadow:1px 1px rgba(0,0,0,.4)}.title a{color:#FF6F00;text-decoration:none}
+</style>
