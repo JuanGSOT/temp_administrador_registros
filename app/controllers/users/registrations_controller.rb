@@ -8,18 +8,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    if check_captcha
-      super
-    else
-      build_resource(sign_up_params)
-      clean_up_passwords(resource)
-      flash.now[:alert] = "Algo salio mal con el código recaptcha. Por favor reescriba el codigo de abajo."
-      flash.delete :recaptcha_error
-      render :new
-    end
+  # def create
+   # if check_captcha
+   #   super
+   # else
+    #   build_resource(sign_up_params)
+    #   clean_up_passwords(resource)
+    #   flash.now[:alert] = "Algo salio mal con el código recaptcha. Por favor reescriba el codigo de abajo."
+    #   flash.delete :recaptcha_error
+    #   render :new
+    # end
   #   super
-  end
+  #end
 
   # GET /resource/edit
   # def edit
