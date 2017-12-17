@@ -1,6 +1,6 @@
 <div class="grid g-s">
 <header>
-  <h2 class="header-session">Change your password?</h2>
+  <h2 class="header-session">Cambiar su contraseña?</h2>
 </header>
 
 <div class="container main my-5">
@@ -10,7 +10,7 @@
   <%= f.hidden_field :reset_password_token %>
 
   <div class="form-group">
-    <%= f.label :password, "New password" %><br />
+    <%= f.label :password, "Nueva contraseña" %><br />
     <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em><br />
     <% end %>
@@ -18,12 +18,12 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
+    <%= f.label :password_confirmation, "Repita su nueva contraseña" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password", class: "btn btn-info btn-lg btn-block" %>
+    <%= f.submit "Cambiar mi password", class: "btn btn-info btn-lg btn-block" %>
   </div>
 <% end %>
 </div>
