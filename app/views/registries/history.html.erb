@@ -38,7 +38,7 @@
                         <label for="">Registros marcados en las fechas entre:</label>
                             <%= text_field_tag :since, params[:since], :class => 'date form-control',autocomplete: 'off' %>
                         <label for="">hasta:</label>
-                            <%= text_field_tag :until, Time.parse(params[:until]).strftime('%d/%m/%Y'), :class => 'date form-control', autocomplete: 'off' %>
+                            <%= text_field_tag :until, params[:until].nil? ? params[:until] : Time.parse(params[:until]).strftime('%d/%m/%Y'), :class => 'date form-control', autocomplete: 'off' %>
                     </div>
                     <%= button_tag(type: "submit", class: "btn btn-info") do %>
                         <i class='mi'>&#xE152;</i> Filtrar
