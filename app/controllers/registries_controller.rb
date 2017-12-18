@@ -115,57 +115,22 @@ class RegistriesController < ApplicationController
       @message = "Todos los registros existentes"
     end
 
+    # datos de profesores por departamento que utilizan el proyector sigo sin indicar fechas
+    # @chart_1, @labels_chart, @chart_color_used, @chart_border_used, @chart_background_used = [], [], [], [], []
+    # @color_chart = ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"]
+    # @border_chart = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#96F", "#FF9F40"]
+    # @background_chart = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"]
 
-    @json = {
-      "type": "bar",
-      "data": 
-      {
-        "labels": 
-        [
-          "Red",
-          "Blue",
-          "Yellow",
-          "Green",
-          "Purple",
-          "Orange"
-        ],
-        "datasets": 
-        [      
-          {
-            "label": "# of Votes",
-            "data": 
-            [
-              12,
-              19,
-              3,
-              5,
-              2,
-              3
-            ],
-            "backgroundColor": 
-            [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            "borderColor": 
-            [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
-            "borderWidth": 1
-          }
-        ]
-      },
-      "options": { "scales": { "yAxes": [{ "ticks": {"beginAtZero": true} }] } }
-    }.to_json.to_s.html_safe
+    # Department.all.each do |t|
+    #   @chart_1 << @registry.where(teacher_id: Teacher.where(department_id: t.id)).count
+    #   @labels_chart << t.name
+    # end
+    # for i in 0..(@chart_1.length - 1)
+    #     @chart_color_used << @color_chart[i]
+    #     @chart_border_used << @border_chart[i]
+    #     @chart_background_used << @background_chart[i]
+    # end
+    # datos de profesores por departamento que utilizan el proyector sigo sin indicar fechas
   end
 
   def titulo(opc)

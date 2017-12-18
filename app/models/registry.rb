@@ -23,9 +23,10 @@ class Registry < ApplicationRecord
   }
   
   scope :filtro_maestro, -> (beginning_date, end_date) {
-    where(:created_at => Time.parse(beginning_date)..Time.parse(end_date), :status => false).paginate(page: 1, per_page: 10).order('id DESC')
+    where(:created_at => Time.parse(beginning_date)..Time.parse(end_date << " 23:59:59"), :status => false).paginate(page: 1, per_page: 10).order('id DESC')
   }
   
+  # busca 
   def self.search(teacher_id, page, option = nil)
     if !option.nil?
       where(:created_at => option, :status => false, :teacher_id => teacher_id.to_i).paginate(page: page, per_page: 10).order('id DESC')
@@ -36,24 +37,27 @@ class Registry < ApplicationRecord
     end
   end
 
+  # de acuerdo a la opcion tomada devuelve un rango de fechas
   def self.filtro(option)
     option = option.to_i
     if option == 1
-      time = Date.today.beginning_of_week..Date.today.end_of_week
+      time = Time.parse(Date.today.beginning_of_week.strftime '%Y-%m-%d %H:%M:%S')..Time.parse(Date.today.end_of_week.strftime '%Y-%m-%d 24:00:00')
     elsif option == 2
-      time = Date.today.beginning_of_month..Date.today.end_of_month
+      time = Time.parse(Date.today.beginning_of_month.strftime '%Y-%m-%d %H:%M:%S')..Time.parse(Date.today.end_of_month.strftime '%Y-%m-%d 24:00:00')
     elsif option == 3
       
       if Date.today.month > 6
-        time = Date.new(Time.now.year, 7, 1)..Date.new(Time.now.year, 12, -1)
+        time = Time.parse(Date.new(Time.now.year, 7, 1).strftime '%Y-%m-%d %H:%M:%S')..Time.parse(Date.new(Time.now.year, 12, -1).strftime '%Y-%m-%d 24:00:00')
       else
-        time = Date.new(Time.now.year, 1, 1)..Date.new(Time.now.year, 6, -1)
+        time = Time.parse(Date.new(Time.now.year, 1, 1).strftime '%Y-%m-%d %H:%M:%S')..Time.parse(Date.new(Time.now.year, 6, -1).strftime '%Y-%m-%d 24:00:00')
       end        
       
     elsif option == 4
       time = Date.today.beginning_of_year..Date.today.end_of_year
+      time = Time.parse(Date.today.beginning_of_year.strftime '%Y-%m-%d %H:%M:%S')..Time.parse(Date.today.end_of_year.strftime '%Y-%m-%d 24:00:00')
     end  
     return time
   end
+  # // // // // // // // // // // // // // // // // // // // // // // // //
   
 end

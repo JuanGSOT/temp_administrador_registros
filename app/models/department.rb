@@ -11,5 +11,5 @@
 
 class Department < ApplicationRecord
     has_many :teachers
-    validates :name, :apartment_manager, presence: true
+    validates :name, :abbrev, :apartment_manager, presence: true
 end

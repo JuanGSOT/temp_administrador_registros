@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20171123000051) do
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
+    t.string "abbrev"
     t.string "apartment_manager"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

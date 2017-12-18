@@ -32,7 +32,12 @@
   </div>
 
   <div class="form-group d-flex justify-content-center flex-column">
-    <%= flash[:recaptcha_error] %>
+    <%if flash[:recaptcha_error] %>
+      <div class="error-captcha">
+        <%= flash[:recaptcha_error] %>
+      </div>
+    <% end %>
+    
     <%= recaptcha_tags %>
   </div>
 

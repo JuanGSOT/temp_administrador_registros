@@ -4,6 +4,11 @@
         <%= f.text_field :name, placeholder: "nombre del departamento", class: "form-control", value: @department_find.name %>
     </div>
     <div class="form-group">
+        <label for="abbrev">Abreviatura del departamento:</label>
+        <%= f.text_field :abbrev, placeholder: "nombre del departamento abreviado", class: "form-control", maxlength: 15 %>
+        <small class="form-text text-muted">Ingrese como maximo 15 caracteres.</small>
+    </div>
+    <div class="form-group">
         <label for="apartment_manager">Encargado del departamento:</label>
         <%= f.text_field :apartment_manager, placeholder: "ingrese nombre completo", class: "form-control", value: @department_find.apartment_manager %>
         <small class="form-text text-muted">Ingrese este campo adecuadamente para los reportes, por ejemplo podria ser Ing. Jardines Jardines Jose.</small>

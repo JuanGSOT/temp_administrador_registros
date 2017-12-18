@@ -38,7 +38,7 @@
                         <label for="">Registros marcados en las fechas entre:</label>
                             <%= text_field_tag :since, params[:since], :class => 'date form-control',autocomplete: 'off' %>
                         <label for="">hasta:</label>
-                            <%= text_field_tag :until, params[:until], :class => 'date form-control', autocomplete: 'off' %>
+                            <%= text_field_tag :until, Time.parse(params[:until]).strftime('%d/%m/%Y'), :class => 'date form-control', autocomplete: 'off' %>
                     </div>
                     <%= button_tag(type: "submit", class: "btn btn-info") do %>
                         <i class='mi'>&#xE152;</i> Filtrar
@@ -56,12 +56,15 @@
         </div>
         <!-- Container simple -->
         
+        <hr style="border-top: 1px solid silver; box-shadow: 0 0 10px gray; width: 80%">
+
         <!-- Chart -->
-            <div class="hide-registry" style="overflow-x: scroll">
-                    <div class="char-container" style="position: relative; height: 400px; width: 800px; margin: 0 auto;">
-                        <canvas id="myChart"></canvas>
-                    </div>
-            </div>
+        <h3 class="text-center">Profesores que solicitaron proyector por departamento</h3>
+<div class="hide-registry" style="overflow-x: scroll">
+        <div class="char-container" style="position: relative; width: 100%; min-width:1000px; margin: 0 auto;">
+            <canvas id="chart_teacher"></canvas>
+        </div>
+</div>
         <!-- Chart -->
         
         <!-- table -->
@@ -118,7 +121,6 @@
 
     <%= render 'layouts/footer' %>
 </div>
-<script>
-var ctx = $("#myChart");
-var myChart = new Chart(ctx, <%= @json %>);
-</script>
+        <script>
+            <%= render :file => 'registries/registries.js.erb' %>
+        </script>

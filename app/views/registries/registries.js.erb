@@ -1,0 +1,106 @@
+<% # datos de profesores por departamento que utilizan el proyector sigo sin indicar fechas
+    @chart_1, @labels_chart, @chart_color_used, @chart_border_used, @chart_background_used = [], [], [], [], []
+    @color_chart = ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"]
+    @border_chart = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#96F", "#FF9F40"]
+    @background_chart = ["#3e95cd", "#8e5ea2","#3cba9f","#F1C40F","#e8c3b9","#c45850","#16A085","#FF5733","#5D6D7E","#28B463","#3e95cd", "#8e5ea2","#3cba9f","#F1C40F","#e8c3b9","#c45850","#16A085","#FF5733","#5D6D7E","#28B463"]
+    
+    Department.all.each do |t|
+      @chart_1 << @registry.where(teacher_id: Teacher.where(department_id: t.id)).count
+      @labels_chart << t.abbrev
+    end
+    for i in 0..(@chart_1.length - 1)
+        @chart_color_used << @color_chart[i]
+        @chart_border_used << @border_chart[i]
+        @chart_background_used << @background_chart[i]
+    end
+    # datos de profesores por departamento que utilizan el proyector sigo sin indicar fechas
+%>
+
+var pieOptions = {
+  title: {
+    display: true,
+    text: '% de Profesores x Dep'
+  },
+  events: false,
+  animation: {
+    duration: 500,
+    easing: "easeOutQuart",
+    onComplete: function () {
+      var ctx = this.chart.ctx;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+
+      this.data.datasets.forEach(function (dataset) {
+
+        for (var i = 0; i < dataset.data.length; i++) {
+          var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+              total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+              mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+              start_angle = model.startAngle,
+              end_angle = model.endAngle,
+              mid_angle = start_angle + (end_angle - start_angle)/2;
+
+          var x = mid_radius * Math.cos(mid_angle);
+          var y = mid_radius * Math.sin(mid_angle);
+
+          ctx.fillStyle = '#fff';
+          if (i == 3){ // Darker text color for lighter background
+            ctx.fillStyle = '#444';
+          }
+          var percent = String(Math.round(dataset.data[i] / total * 100)) + "%";
+          ctx.font = "12px Verdana";      
+          ctx.fillText(dataset.data[i] + ' profesores', model.x + x, model.y + y);
+          
+          // Display percent 
+          ctx.font = "20px Verdana";      
+          ctx.fillText(percent, model.x + x, model.y + y + 30);
+        }
+      });               
+    }
+  }
+};
+
+// new Chart(document.getElementById("chart_teacher"), {
+//     type: 'pie',
+//     data: {
+//       labels: <%= @labels_chart.to_json.to_s.html_safe %>,
+//       datasets: [{
+//         label: "Profesores x Departamento",
+//         backgroundColor: <%= @chart_background_used.to_json.to_s.html_safe %>,
+//         data: <%= @chart_1.to_json.to_s.html_safe %>
+//       }]
+//     },
+//   options: {
+//     title: {
+//         display: true,
+//         text: '% de Profesores x Dep'
+//       }
+//     }
+// });
+
+new Chart(document.getElementById("chart_teacher"), {
+  type: 'bar',
+  data: {
+    labels: <%= @labels_chart.to_json.to_s.html_safe %>,
+    datasets: [
+      {
+        label: "Solicitudes (de Profesores)",
+        backgroundColor: <%= @chart_background_used.to_json.to_s.html_safe %>,
+        data: <%= @chart_1.to_json.to_s.html_safe %>
+      }
+    ]
+  },
+  options: {
+    legend: { display: false },
+    title: {
+      display: true,
+      text: 'Cantidad de prestamos registrados por cada departamento'
+    },
+    animation: {
+      onComplete: function() {
+        var ctx = this.chart.ctx;
+        ctx.font = "5px Verdana";
+      }
+    }
+  }
+});

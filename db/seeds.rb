@@ -11,8 +11,8 @@ for i in (1..4)
     Classroom.create(name: valor)
 end
 
-Department.create(name: "Sistemas y Computación", apartment_manager: "Ing. Nuñez Ayala Abel")
-Department.create(name: "Ciencias Basicas", apartment_manager: "Ing. Lorem Ipsum")
+Department.create(name: "Sistemas y Computación", abbrev: "Sis y Comp", apartment_manager: "Ing. Nuñez Ayala Abel")
+Department.create(name: "Ciencias Basicas", abbrev: "C. Basicas", apartment_manager: "Ing. Lorem Ipsum")
 
 # contract 1 = honorario : 0 = plaza
 Article.create(name: "Proyector 1", details: "A2YT3U2Y4I", description: "proyecto comun y corriente")
@@ -25,12 +25,13 @@ Teacher.create(code: 2, name: "Luis",       surnames: "Ávila Camacho",      con
 Teacher.create(code: 3, name: "Margarita",  surnames: "Conzuelo Vivian",    contract: false, department_id: 1)
 Teacher.create(code: 4,	name: "Veronica",   surnames: "Azcally Zu",         contract: true, department_id: 2)
 
-=begin
+#=begin
 (5..15).each do |t|
-    Teacher.create( code: t, name: (Faker::Name.name), surnames: (Faker::Name.last_name), contract: (Faker::Boolean.boolean), department_id: (Faker::Number.between(1, 2)), created_at: Faker::Date.between(Date.today, 2.year.ago) )
+    Teacher.create( code: t, name: (Faker::Name.name), surnames: (Faker::Name.last_name), contract: (Faker::Boolean.boolean), department_id: (Faker::Number.between(1, 8))) #, created_at: Faker::Date.between(Date.today, 2.year.ago) )
     Article.create(name: "Proyector #{t}", details: "AAAAAAAA", description: "lorem ipsum", created_at: Faker::Date.between(Date.today, 2.year.ago))
     Classroom.create(name: "A#{t}", created_at: Faker::Date.between(Date.today, 2.year.ago))
 end
+=begin
 (1..15).each do |t|
     Registry.create(article_id: t, user_id: 1, teacher_id: t, classroom_id: t, status: false, created_at: Faker::Time.forward( Faker::Number.between(1, 365), :all ) )
 end

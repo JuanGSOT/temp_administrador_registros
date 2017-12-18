@@ -4,30 +4,32 @@
     <div class="container main">
     <br>
     <h1>Departamentos</h1>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <table class="table table-hover table-responsive">
+        <div class="container">
+            <!--<div class="col-xs-12 col-sm-6 col-md-6">-->
+                <table class="table table-hover table-responsive" style="display: table;width: 100%">
                     <thead>
                         <tr>
                             <td scope="col">Eliminar</td>
                             <td scope="col">Editar</td>
                             <td scope="col">Nombre</td>
+                            <td scope="col">Abreviación</td>
                         </tr>
                     </thead>
-                    <tbody class="">
-                        <tr>
+                    <tbody>
                         <% @departments.each do |t| %>
+                        <tr valign="middle">
                             <td><%= link_to raw("<i class='mi md-36'>&#xE92B;</i>"), t, method: :delete, data: { confirm: 'Estas seguro de eliminarlo?' }, class: "btn btn-danger" %></td>
                             <td><a href="/departments/<%= t.id %>" class="btn btn-warning"><i class="mi md-36 md-light">&#xE150;</i></a></td>
-                            <td><h4><%= t.name %></h4></td>
+                            <td><h5><%= t.name %></h5></td>
+                            <td><h5><%= t.abbrev %></h5></td>
                         </tr>
                         <% end %>
                     </tbody>
                 </table>
+            <!--<div id="container" class="col-xs-12 col-sm-6 col-md-6 container">
             </div>
-            <div id="container" class="col-xs-12 col-sm-6 col-md-6 container">
                
-            </div>
+            </div>-->
         </div>
     
         <div class="jumbotron">

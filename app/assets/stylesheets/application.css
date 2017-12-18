@@ -28,6 +28,13 @@
   background-color: #fff;
   position: relative;
 }
+select{
+  width: 100%;
+  background: white;
+  border-radius: .25em;
+  border: 1px solid #ced4da;
+  padding: 8px 10px;
+}
 
 .notice, .alert-rails {
   color: white;
@@ -111,6 +118,16 @@ footer {
   max-width: 300px;
 }
 
+.error-captcha{
+  background: red;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  margin: 10px 0;
+  border-radius: .2em;
+  border-top: 5px solid #991317;
+  border-bottom: 5px solid #991317;
+}
 
 /* grid */
 .grid {
